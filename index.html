@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>홍진효 Hong Jinhyo — Trilingual Interpreter · KOR / ENG / 中</title>
-<meta name="description" content="한국어·영어·중국어 트라이링구얼 통역사 홍진효. 싱가포르 국제 박람회 부스 통역, 공연 현장 운영 통역, 비즈니스·기술 통역, 의료 통역. Trilingual Korean–English–Chinese interpreter based in Singapore.">
+<meta name="description" content="한국어·영어·중국어 트라이링구얼 통역사 홍진효. 싱가포르 국제 박람회 부스 통역, 공연 현장 운영 통역, 학술·정책 인터뷰 통역, 비즈니스·기술 통역, 의료 통역. Trilingual Korean–English–Chinese interpreter based in Singapore.">
 <meta name="theme-color" content="#0d0b0a">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://hongjinhyotop-cpu.github.io/">
 <meta property="og:title" content="홍진효 Hong Jinhyo — Trilingual Interpreter">
-<meta property="og:description" content="KOR · ENG · 中 — Booth, concert operations, business, technical & medical interpreting in Singapore.">
+<meta property="og:description" content="KOR · ENG · 中 — Booth, concert operations, research interview, business, technical & medical interpreting in Singapore.">
 <meta property="og:image" content="https://hongjinhyotop-cpu.github.io/assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -368,6 +368,18 @@
   }
   .js .entry.in:hover .poster-panel .poster{transform:translateY(-50%) rotate(0deg) scale(1.025);}
   .poster-tag{position:absolute; z-index:3; top:20px; left:20px; color:var(--dim);}
+  .bridge-panel .bridge{position:absolute; inset:0; width:100%; height:100%; z-index:1;}
+  .bridge-panel .bridge path{fill:var(--red); opacity:.92;}
+  .bridge-label{position:absolute; z-index:2; left:50%; top:9%; transform:translateX(-50%); padding:6px 12px; border-radius:999px; background:var(--paper); color:var(--ink); font-weight:600; white-space:nowrap;}
+  .logo-tile{
+    position:absolute; z-index:2; top:44%; width:31%; aspect-ratio:5 / 3;
+    display:grid; place-items:center; padding:5% 4%;
+    background:var(--paper); border-radius:6px;
+    box-shadow:0 20px 50px rgba(0,0,0,.55);
+  }
+  .logo-tile img{width:100%; height:100%; object-fit:contain;}
+  .lt-left{left:3%; transform:rotate(-2deg);}
+  .lt-right{right:3%; transform:rotate(2deg);}
   .classified{
     position:absolute; top:22px; right:22px; z-index:2;
     color:var(--red); border:1.5px solid var(--red); outline:1px solid var(--red); outline-offset:3px;
@@ -639,8 +651,8 @@
 
 <div class="band" aria-hidden="true">
   <div class="band-track">
-    <div class="band-group"><span><i lang="en">Seafood Expo Asia</i><b class="sep">通</b><span lang="ko">치과 AI</span><b class="sep">譯</b><i lang="en">K-POP Concert</i><b class="sep">通</b><span lang="en">PLAVE</span><b class="sep">譯</b><span lang="zh-Hans">金融科技</span><b class="sep">通</b><i lang="en">FHA Singapore</i><b class="sep">譯</b><span lang="ko">전통주</span><b class="sep">通</b><i lang="en">Banking IT</i><b class="sep">譯</b><span lang="zh-Hans">医疗美容</span><b class="sep">通</b><i lang="en">IDEM</i><b class="sep">譯</b><span lang="ko">한미연합훈련</span><b class="sep">通</b><i lang="en">Cloud Architecture</i><b class="sep">譯</b></span></div>
-    <div class="band-group"><span><i lang="en">Seafood Expo Asia</i><b class="sep">通</b><span lang="ko">치과 AI</span><b class="sep">譯</b><i lang="en">K-POP Concert</i><b class="sep">通</b><span lang="en">PLAVE</span><b class="sep">譯</b><span lang="zh-Hans">金融科技</span><b class="sep">通</b><i lang="en">FHA Singapore</i><b class="sep">譯</b><span lang="ko">전통주</span><b class="sep">通</b><i lang="en">Banking IT</i><b class="sep">譯</b><span lang="zh-Hans">医疗美容</span><b class="sep">通</b><i lang="en">IDEM</i><b class="sep">譯</b><span lang="ko">한미연합훈련</span><b class="sep">通</b><i lang="en">Cloud Architecture</i><b class="sep">譯</b></span></div>
+    <div class="band-group"><span><i lang="en">Seafood Expo Asia</i><b class="sep">通</b><span lang="ko">치과 AI</span><b class="sep">譯</b><i lang="en">K-POP Concert</i><b class="sep">通</b><span lang="en">PLAVE</span><b class="sep">譯</b><i lang="en">Press Arbitration</i><b class="sep">通</b><span lang="ko" class="hanja">言論仲裁</span><b class="sep">譯</b><span lang="zh-Hans">金融科技</span><b class="sep">通</b><i lang="en">FHA Singapore</i><b class="sep">譯</b><span lang="ko">전통주</span><b class="sep">通</b><i lang="en">Banking IT</i><b class="sep">譯</b><span lang="zh-Hans">医疗美容</span><b class="sep">通</b><i lang="en">IDEM</i><b class="sep">譯</b><span lang="ko">한미연합훈련</span><b class="sep">通</b><i lang="en">Cloud Architecture</i><b class="sep">譯</b></span></div>
+    <div class="band-group"><span><i lang="en">Seafood Expo Asia</i><b class="sep">通</b><span lang="ko">치과 AI</span><b class="sep">譯</b><i lang="en">K-POP Concert</i><b class="sep">通</b><span lang="en">PLAVE</span><b class="sep">譯</b><i lang="en">Press Arbitration</i><b class="sep">通</b><span lang="ko" class="hanja">言論仲裁</span><b class="sep">譯</b><span lang="zh-Hans">金融科技</span><b class="sep">通</b><i lang="en">FHA Singapore</i><b class="sep">譯</b><span lang="ko">전통주</span><b class="sep">通</b><i lang="en">Banking IT</i><b class="sep">譯</b><span lang="zh-Hans">医疗美容</span><b class="sep">通</b><i lang="en">IDEM</i><b class="sep">譯</b><span lang="ko">한미연합훈련</span><b class="sep">通</b><i lang="en">Cloud Architecture</i><b class="sep">譯</b></span></div>
   </div>
 </div>
 
@@ -665,13 +677,13 @@
       </dl>
       <div class="intro-body rv">
         <p data-i18n="intro.p1">한국어·영어·중국어를 모두 <strong>원어민 수준</strong>으로 구사하는 트라이링구얼 통역사입니다. 중국 쑤저우에서 학창 시절을 보내며 익힌 중국어는 일상 회화를 넘어 <strong>고문(문언문) 독해</strong>까지 가능하고, 현재는 싱가포르 SMU에서 금융을 전공하며 <strong>비즈니스 현장의 언어</strong>를 함께 익히고 있습니다.</p>
-        <p data-i18n="intro.p2">Seafood Expo Asia·IDEM·FHA 등 싱가포르 국제 박람회 부스 통역, PLAVE 콘서트 현장의 네트워크·운영 통역, LG CNS의 글로벌 뱅킹 기술 통역, 피부과 클리닉 의료 통역, 한미 연합훈련 통역병 복무까지 — 다양한 환경에서 <strong>실시간 통역</strong>을 수행해왔습니다.</p>
+        <p data-i18n="intro.p2">Seafood Expo Asia·IDEM·FHA 등 싱가포르 국제 박람회 부스 통역, PLAVE 콘서트 현장의 네트워크·운영 통역, 언론중재위원회의 NTU 전문가 인터뷰 통역, LG CNS의 글로벌 뱅킹 기술 통역, 피부과 클리닉 의료 통역, 한미 연합훈련 통역병 복무까지 — 다양한 환경에서 <strong>실시간 통역</strong>을 수행해왔습니다.</p>
       </div>
     </div>
 
     <div class="stats">
       <div class="stat rv"><div class="num" data-count="3"><span class="v">03</span></div><p class="stat-l" data-i18n="stat.1">구사 언어</p></div>
-      <div class="stat rv"><div class="num" data-count="4"><span class="v">04</span></div><p class="stat-l" data-i18n="stat.2">2026 싱가포르 현장 통역</p></div>
+      <div class="stat rv"><div class="num" data-count="5"><span class="v">05</span></div><p class="stat-l" data-i18n="stat.2">2026 싱가포르 현장 통역</p></div>
       <div class="stat rv"><div class="num" data-count="30"><sup>~</sup><span class="v">30</span></div><p class="stat-l" data-i18n="stat.3">의료 통역 하루 응대 고객</p></div>
       <div class="stat rv"><div class="num" data-count="15"><span class="v">15</span></div><p class="stat-l" data-i18n="stat.4">분대장으로 이끈 분대원</p></div>
     </div>
@@ -691,7 +703,7 @@
     <div class="entries">
 
       <article class="entry rv">
-        <div class="entry-head mono"><span class="e-no">01 / 07</span><span class="e-dom"><span class="hanja" aria-hidden="true">演</span>Live concert · K-POP</span><span class="e-date">2026.10.15 — 17</span></div>
+        <div class="entry-head mono"><span class="e-no">01 / 08</span><span class="e-dom"><span class="hanja" aria-hidden="true">演</span>Live concert · K-POP</span><span class="e-date">2026.10.15 — 17</span></div>
         <div class="entry-body">
           <figure class="media glyph-panel poster-panel">
             <span class="big-glyph hanja" aria-hidden="true">演</span>
@@ -709,7 +721,27 @@
       </article>
 
       <article class="entry rv">
-        <div class="entry-head mono"><span class="e-no">02 / 07</span><span class="e-dom"><span class="hanja" aria-hidden="true">海</span>Seafood · F&amp;B</span><span class="e-date">2026.09.02 — 04</span></div>
+        <div class="entry-head mono"><span class="e-no">02 / 08</span><span class="e-dom"><span class="hanja" aria-hidden="true">仲</span>Media policy · Research interview</span><span class="e-date">2026.10.01</span></div>
+        <div class="entry-body">
+          <figure class="media glyph-panel bridge-panel">
+            <span class="big-glyph hanja" aria-hidden="true">仲</span>
+            <svg class="bridge" viewBox="0 0 400 300" aria-hidden="true"><path d="M40 170 Q200 -6 360 170 L326 170 Q200 44 74 170 Z"/></svg>
+            <span class="bridge-label mono" aria-hidden="true">KO ⇄ EN</span>
+            <span class="logo-tile lt-left"><img src="assets/pac-logo.png" alt="언론중재위원회 Press Arbitration Commission" loading="lazy" width="480" height="339"></span>
+            <span class="logo-tile lt-right"><img src="assets/ntu-logo.png" alt="Nanyang Technological University" loading="lazy" width="738" height="264"></span>
+            <figcaption class="l3"><b>KO ⇄ EN</b><span>Expert interviews ×2 · NTU</span></figcaption>
+          </figure>
+          <div class="e-text">
+            <h3 class="e-org">Press Arbitration Commission <i>at NTU</i></h3>
+            <p class="e-place mono">Wee Kim Wee School of Comm. &amp; Information · NTU</p>
+            <p class="e-role" data-i18n="w8.role">연구 인터뷰 통역 (한-영 순차) · 언론중재위원회 해외 조사</p>
+            <p class="e-desc" data-i18n="w8.desc">한국 언론중재위원회의 싱가포르 현지 조사에 동행해, NTU 커뮤니케이션 학부 교수진과의 전문가 인터뷰 두 건을 한-영 순차 통역했습니다. 사전에 위원회 영문 자료와 질문지로 조정·중재·정정보도 등 언론 분쟁 용어를 정리했고, 싱가포르의 언론 피해 구제 방식, 플랫폼 확산에 따른 정정보도의 한계, POFMA, 뉴스 제작에 AI가 쓰이며 생기는 쟁점 같은 정책·학술 논의를 정확히 옮겼습니다.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry rv">
+        <div class="entry-head mono"><span class="e-no">03 / 08</span><span class="e-dom"><span class="hanja" aria-hidden="true">海</span>Seafood · F&amp;B</span><span class="e-date">2026.09.02 — 04</span></div>
         <div class="entry-body">
           <figure class="media">
             <img class="ph" src="assets/seafood-expo.jpg" alt="Seafood Expo Asia 2026 해청정 부스에서 제품을 소개하는 모습" loading="lazy" width="1100" height="1214" style="object-position:50% 22%">
@@ -725,7 +757,7 @@
       </article>
 
       <article class="entry rv">
-        <div class="entry-head mono"><span class="e-no">03 / 07</span><span class="e-dom"><span class="hanja" aria-hidden="true">酒</span>Traditional liquor · F&amp;B</span><span class="e-date">2026.04.21 — 23</span></div>
+        <div class="entry-head mono"><span class="e-no">04 / 08</span><span class="e-dom"><span class="hanja" aria-hidden="true">酒</span>Traditional liquor · F&amp;B</span><span class="e-date">2026.04.21 — 23</span></div>
         <div class="entry-body">
           <figure class="media">
             <img class="ph" src="assets/fha.jpg" alt="FHA 2026 신평양조장 부스에서 바이어와 함께한 모습" loading="lazy" width="1200" height="675" style="object-position:34% 50%">
@@ -741,7 +773,7 @@
       </article>
 
       <article class="entry rv">
-        <div class="entry-head mono"><span class="e-no">04 / 07</span><span class="e-dom"><span class="hanja" aria-hidden="true">齒</span>Dental AI · Medtech</span><span class="e-date">2026.04.17 — 19</span></div>
+        <div class="entry-head mono"><span class="e-no">05 / 08</span><span class="e-dom"><span class="hanja" aria-hidden="true">齒</span>Dental AI · Medtech</span><span class="e-date">2026.04.17 — 19</span></div>
         <div class="entry-body">
           <figure class="media">
             <img class="ph" src="assets/idem.jpg" alt="IDEM Singapore 2026 innoDtech 부스 상담 통역 모습" loading="lazy" width="1200" height="675" style="object-position:30% 50%">
@@ -757,7 +789,7 @@
       </article>
 
       <article class="entry rv">
-        <div class="entry-head mono"><span class="e-no">05 / 07</span><span class="e-dom"><span class="hanja" aria-hidden="true">金</span>Banking IT · Cloud</span><span class="e-date">2026.05 — 2026.07</span></div>
+        <div class="entry-head mono"><span class="e-no">06 / 08</span><span class="e-dom"><span class="hanja" aria-hidden="true">金</span>Banking IT · Cloud</span><span class="e-date">2026.05 — 2026.07</span></div>
         <div class="entry-body">
           <figure class="media glyph-panel">
             <span class="big-glyph hanja" aria-hidden="true">金</span>
@@ -775,7 +807,7 @@
       </article>
 
       <article class="entry rv">
-        <div class="entry-head mono"><span class="e-no">06 / 07</span><span class="e-dom"><span class="hanja" aria-hidden="true">醫</span>Aesthetic medicine</span><span class="e-date">2025.04 — 2025.05</span></div>
+        <div class="entry-head mono"><span class="e-no">07 / 08</span><span class="e-dom"><span class="hanja" aria-hidden="true">醫</span>Aesthetic medicine</span><span class="e-date">2025.04 — 2025.05</span></div>
         <div class="entry-body">
           <figure class="media glyph-panel">
             <span class="big-glyph hanja" aria-hidden="true">醫</span>
@@ -792,7 +824,7 @@
       </article>
 
       <article class="entry rv">
-        <div class="entry-head mono"><span class="e-no">07 / 07</span><span class="e-dom"><span class="hanja" aria-hidden="true">軍</span>Joint operations · Defense</span><span class="e-date">2023.10 — 2025.04</span></div>
+        <div class="entry-head mono"><span class="e-no">08 / 08</span><span class="e-dom"><span class="hanja" aria-hidden="true">軍</span>Joint operations · Defense</span><span class="e-date">2023.10 — 2025.04</span></div>
         <div class="entry-body">
           <figure class="media">
             <img class="ph" src="assets/rok-us.jpg" alt="한미연합훈련 작전 브리핑 통역 모습" loading="lazy" width="540" height="360" style="object-position:100% 50%">
@@ -905,6 +937,7 @@
       <li class="svc-row rv"><span class="svc-no">05</span><h3 data-i18n="svc.5t">의료 통역</h3><p data-i18n="svc.5d">상담·시술·사후 관리까지 한-중 의료 통역 — IH Clinic 실무 경험</p><span class="svc-arrow" aria-hidden="true">↗</span></li>
       <li class="svc-row rv"><span class="svc-no">06</span><h3 data-i18n="svc.6t">비즈니스·기술 통역</h3><p data-i18n="svc.6d">IT·클라우드·금융 등 전문 분야 미팅 통역 — LG CNS 실무 경험</p><span class="svc-arrow" aria-hidden="true">↗</span></li>
       <li class="svc-row rv"><span class="svc-no">07</span><h3 data-i18n="svc.7t">공연·대형 행사 운영 통역</h3><p data-i18n="svc.7d">제작진과 현지 스태프 간 네트워크·운영 소통 통역 — PLAVE 콘서트 실무 경험</p><span class="svc-arrow" aria-hidden="true">↗</span></li>
+      <li class="svc-row rv"><span class="svc-no">08</span><h3 data-i18n="svc.8t">학술·정책 인터뷰 통역</h3><p data-i18n="svc.8d">교수·연구진 대상 전문가 인터뷰 한-영 순차 통역 — 언론중재위원회 NTU 인터뷰 실무 경험</p><span class="svc-arrow" aria-hidden="true">↗</span></li>
     </ol>
 
     <p class="avail rv"><span class="mono"><i></i>Available</span><span data-i18n="svc.avail">싱가포르 거주 · 현지 출퇴근 가능 · SECC / MBS / Singapore EXPO 전 지역</span></p>
@@ -968,7 +1001,7 @@
       'hero.lede': `Korean, English, Chinese — one seamless conversation on the show floor.`,
       'intro.quote': `On the show floor, at the negotiating table, in the clinic, at the concert venue — and in the field.`,
       'intro.p1': `I'm a trilingual interpreter with <strong>native-level</strong> Korean, English and Chinese. The Chinese I built during my school years in Suzhou goes beyond everyday conversation to <strong>reading Classical Chinese</strong>, and as a Finance major at Singapore Management University I'm also fluent in <strong>the language of business</strong>.`,
-      'intro.p2': `Booth interpreting at Seafood Expo Asia, IDEM and FHA in Singapore, network and operations interpreting on site at a PLAVE concert, technical interpreting for global banking projects at LG CNS, medical interpreting at a dermatology clinic, and serving as an interpreter in ROK–US combined exercises — I've delivered <strong>real-time interpretation</strong> across a wide range of settings.`,
+      'intro.p2': `Booth interpreting at Seafood Expo Asia, IDEM and FHA in Singapore, network and operations interpreting on site at a PLAVE concert, Korean–English interpreting for the Press Arbitration Commission's expert interviews at NTU, technical interpreting for global banking projects at LG CNS, medical interpreting at a dermatology clinic, and serving as an interpreter in ROK–US combined exercises — I've delivered <strong>real-time interpretation</strong> across a wide range of settings.`,
       'stat.1': `Working languages`,
       'stat.2': `On-site interpreting jobs, Singapore 2026`,
       'stat.3': `Clients a day in medical interpreting`,
@@ -976,6 +1009,8 @@
       'work.title': `Proven in the room.`,
       'w0.role': `On-site Concert Interpreter · Network &amp; Operations`,
       'w0.desc': `Working between the Korean production crew and the local promoter and staff, I handled network and operations interpreting in Korean, English and Chinese. Over three days I connected Korean engineers with local IT and operations teams in real time — through technical discussions and on-site coordination — and in a live-show environment where issues move fast, I focused on conveying each side's intent accurately and neutrally.`,
+      'w8.role': `Research Interview Interpreter (Korean–English consecutive) · Press Arbitration Commission field study`,
+      'w8.desc': `Accompanying the Korean Press Arbitration Commission on its field study in Singapore, I provided Korean–English consecutive interpreting for two expert interviews with NTU communication faculty. I built a glossary of press-dispute terms — conciliation, arbitration, corrections — in advance from the Commission's English materials and the questionnaires, and accurately conveyed policy and academic discussion on how press grievances are handled in Singapore, the limits of corrections as content spreads across platforms, POFMA, and the new issues AI raises in news production.`,
       'w1.role': `Booth Interpreter (Chinese) · Hae Cheong Jeong, Korea Pavilion`,
       'w1.desc': `Placed by exhibition agency Hypers, I was the dedicated Chinese interpreter for Hae Cheong Jeong (HAECHOMIIN) in the Korea Pavilion. After mastering its range of ready-to-eat, low-calorie noodles — seaweed, tofu, kelp and black bean — and their selling points (gluten-free and vegan certified, free from four common additives, shelf-stable), I interpreted product introductions and consultations for Chinese-speaking buyers over three days and kept the export consultation log.`,
       'w2.role': `Booth Interpreter · Sinpyeong Brewery`,
@@ -1014,6 +1049,8 @@
       'svc.6d': `Meeting interpretation for IT, cloud and finance — hands-on at LG CNS`,
       'svc.7t': `Concert &amp; large-event operations interpreting`,
       'svc.7d': `Network and operations interpreting between production crews and local staff — hands-on at a PLAVE concert`,
+      'svc.8t': `Academic &amp; policy interview interpreting`,
+      'svc.8d': `Korean–English consecutive interpreting for expert interviews with faculty and researchers — hands-on for the Press Arbitration Commission at NTU`,
       'svc.avail': `Based in Singapore · On-site at SECC, MBS and Singapore EXPO`,
       'contact.title': `Let's work together.`,
       'contact.text': `For expo and event interpreting, reach out anytime. I'm based in Singapore, ready to join on short notice, and I reply fast.`,
@@ -1024,7 +1061,7 @@
       'hero.lede': `韩·英·中三语，让现场沟通畅通无阻。`,
       'intro.quote': `从展会现场到谈判桌，从诊室到演唱会现场，再到实战演训场。`,
       'intro.p1': `精通韩语、英语、中文，三语均达<strong>母语水平</strong>。中学时代在苏州度过，中文能力不止于日常交流，更能<strong>阅读文言文</strong>；目前就读于新加坡管理大学（SMU）金融专业，同时深入掌握<strong>商务场景的语言</strong>。`,
-      'intro.p2': `曾在新加坡 Seafood Expo Asia、IDEM、FHA 等国际展会担任展位口译，在 PLAVE 演唱会现场担任网络及运营口译，为 LG CNS 全球银行项目提供技术口译，在皮肤科诊所担任医疗口译，并在韩美联合演训中担任翻译兵——在各类现场完成<strong>实时口译</strong>。`,
+      'intro.p2': `曾在新加坡 Seafood Expo Asia、IDEM、FHA 等国际展会担任展位口译，在 PLAVE 演唱会现场担任网络及运营口译，为韩国言论仲裁委员会在 NTU 的专家访谈提供韩英口译，为 LG CNS 全球银行项目提供技术口译，在皮肤科诊所担任医疗口译，并在韩美联合演训中担任翻译兵——在各类现场完成<strong>实时口译</strong>。`,
       'stat.1': `工作语言`,
       'stat.2': `2026 新加坡现场口译`,
       'stat.3': `医疗口译日均接待顾客`,
@@ -1032,6 +1069,8 @@
       'work.title': `现场，就是证明。`,
       'w0.role': `演唱会现场口译员 · 网络及运营`,
       'w0.desc': `在韩国制作团队与当地主办方及工作人员之间，以韩语、英语、中文担任网络及运营口译。三天内实时衔接韩国工程师与当地 IT 及运营人员的技术协商和现场运营沟通；在问题瞬息万变的演出环境中，专注于中立、准确地传达双方意图。`,
+      'w8.role': `研究访谈口译（韩英交替传译）· 韩国言论仲裁委员会海外调研`,
+      'w8.desc': `随同韩国言论仲裁委员会赴新加坡实地调研，为与 NTU 传播学院教授团队的两场专家访谈提供韩英交替传译。事先依据委员会英文资料及访谈提纲整理调解、仲裁、更正报道等新闻纠纷术语，准确传达了新加坡新闻侵害救济方式、跨平台传播下更正报道的局限、POFMA，以及 AI 参与新闻生产带来的新议题等政策与学术讨论。`,
       'w1.role': `展会口译员（中文）· Hae Cheong Jeong 展位，韩国馆`,
       'w1.desc': `经展会代理公司 Hypers 派遣，全程负责韩国馆参展商 Hae Cheong Jeong（HAECHOMIIN）展位的中文口译。事先熟悉海藻面、豆腐面、海带面、黑豆面等即食低卡健康面系列的产品特点（无麸质及纯素认证、四无添加、常温保存），在三天展期内为华语买家提供产品介绍及洽谈口译，并撰写出口洽谈记录。`,
       'w2.role': `展会口译员 · Sinpyeong Brewery（韩国传统酒）`,
@@ -1070,6 +1109,8 @@
       'svc.6d': `IT、云计算、金融等专业领域会议口译——LG CNS 实务经验`,
       'svc.7t': `演唱会·大型活动运营口译`,
       'svc.7d': `制作团队与当地工作人员之间的网络及运营沟通口译——PLAVE 演唱会实务经验`,
+      'svc.8t': `学术·政策访谈口译`,
+      'svc.8d': `面向教授及研究人员的专家访谈韩英交替传译——韩国言论仲裁委员会 NTU 访谈实务经验`,
       'svc.avail': `常驻新加坡 · 可前往 SECC / MBS / Singapore EXPO 全区域`,
       'contact.title': `期待与您合作。`,
       'contact.text': `展会及活动口译咨询，欢迎随时联系。本人常驻新加坡，可即时到岗，并会尽快回复。`,
