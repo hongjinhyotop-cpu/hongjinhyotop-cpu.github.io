@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>홍진효 Hong Jinhyo — Interpreter's Passport · KOR / ENG / 中</title>
+<meta name="description" content="한국어·영어·중국어 트라이링구얼 통역사 홍진효. 싱가포르 국제 박람회 부스 통역, 공연 현장 운영 통역, 학술·정책 인터뷰 통역, 비즈니스·기술 통역, 의료 통역. Trilingual Korean–English–Chinese interpreter based in Singapore.">
+<meta name="theme-color" content="#0f0c0b">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+KR:wght@500;600;700;900&family=Noto+Serif+SC:wght@500;600;700;900&display=swap" rel="stylesheet">
+<script>
+/* Pick the experience before first paint: full 3D, or the light list version. */
+(function(){
+  var d = document.documentElement, q = null, s = null;
+  try { q = new URLSearchParams(location.search).get('mode'); } catch(e){}
+  try { s = localStorage.getItem('pp-mode'); } catch(e){}
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cores = navigator.hardwareConcurrency || 8, mem = navigator.deviceMemory || 8;
+  var save = navigator.connection && navigator.connection.saveData;
+  var weak = cores <= 2 || mem <= 2 || save;
+  var mode = (q === 'list' || q === '3d') ? q : (s === 'list' || s === '3d') ? s : ((reduce || weak) ? 'list' : '3d');
+  if (!('IntersectionObserver' in window) || !window.CSS || !CSS.supports('transform-style','preserve-3d')) mode = 'list';
+  d.classList.add('js', mode === '3d' ? 'full' : 'lite');
+  if (reduce) d.classList.add('reduce');
+  d.setAttribute('data-auto', (reduce || weak) ? (reduce ? 'reduce' : 'weak') : 'none');
+})();
+</script>
+<link rel="stylesheet" href="passport.css">
+</head>
+<body>
+
+<nav class="topbar" aria-label="Site">
+  <a class="brand" href="#top" aria-label="Hong Jinhyo — top">
+    <span class="seal-mini hanja" aria-hidden="true"><span>通</span><span>譯</span></span>
+    <span class="mono brand-name">Hong Jinhyo</span>
+  </a>
+  <div class="tb-center mono" aria-hidden="true">
+    <span class="tb-doc">Passport · No. JIN-2026</span>
+    <span class="tb-page" id="tbPage">P.00 — Cover</span>
+  </div>
+  <div class="tb-right">
+    <div class="langs" role="group" aria-label="Language" data-active="ko">
+      <span class="ind" aria-hidden="true"></span>
+      <button type="button" data-lang="ko" aria-pressed="true" lang="ko">KOR</button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en">ENG</button>
+      <button type="button" data-lang="zh" aria-pressed="false" lang="zh-Hans">中文</button>
+    </div>
+    <button type="button" class="tb-icon" id="soundBtn" aria-pressed="false" aria-label="Stamp sound effects" title="Sound">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9h3l5-4v14l-5-4H4z"/><path class="on" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="off" d="M16 9l5 6M21 9l-5 6"/></svg>
+    </button>
+    <button type="button" class="tb-icon tb-view mono" id="viewBtn" aria-label="Switch between 3D passport and list view" title="3D / List">
+      <span class="v3d">3D</span><span class="vlist">List</span>
+    </button>
+    <a class="tb-cta mono" href="#contact">Contact <span aria-hidden="true">↗</span></a>
+  </div>
+  <div class="tb-progress" id="prog"></div>
+</nav>
+
+<main id="top">
+
+<!-- ============ PASSPORT ============ -->
+<section class="pp" id="passport" aria-label="Passport">
+  <div class="pp-stage" id="ppStage">
+    <div class="pp-bg" aria-hidden="true"><span class="pp-glyph hanja">通譯</span></div>
+
+    <aside class="pp-side pp-side-l" aria-hidden="true">
+      <p class="mono side-k">Trilingual Interpreter</p>
+      <p class="side-route mono"><b>SEL</b><i></i><b>SZV</b><i></i><b>SIN</b></p>
+      <p class="mono side-s">KOR / ENG / 中 — Singapore</p>
+    </aside>
+    <aside class="pp-side pp-side-r" aria-hidden="true">
+      <p class="mono side-k">Visas — 08</p>
+      <p class="mono side-s" data-i18n="ui.scroll">스크롤하면 여권이 넘어갑니다</p>
+      <span class="side-cue"><i></i></span>
+    </aside>
+
+    <ol class="pp-rail mono" id="ppRail" aria-label="Passport pages"></ol>
+
+    <div class="book-wrap" id="bookWrap"><div class="book" id="book"></div></div>
+
+    <div class="pp-pill mono" id="ppPill">
+      <button type="button" class="pill-btn" id="pillPrev" aria-label="Previous page">‹</button>
+      <span class="pill-label" id="pillLabel" aria-live="polite">Cover</span>
+      <button type="button" class="pill-btn" id="pillNext" aria-label="Next page">›</button>
+    </div>
+  </div>
+
+  <div class="pp-snaps" id="ppSnaps" aria-hidden="true"></div>
+
+  <!-- Source pages. Shown as a list in the light version; moved into the 3D book otherwise. -->
+  <div class="pp-pages" id="ppSrc">
+
+    <!-- Cover -->
+    <section class="page pg-cover" data-page="cover" data-label="Cover">
+      <div class="cv">
+        <p class="cv-top mono">Trilingual Interpreter</p>
+        <p class="cv-doc"><span lang="ko">여권</span><span class="cv-dot">·</span><span lang="zh-Hans">护照</span></p>
+        <p class="cv-pp foil">PASSPORT</p>
+        <svg class="cv-emblem" viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#f6e3a8"/><stop offset=".45" stop-color="#c99a4b"/><stop offset=".7" stop-color="#f2d690"/><stop offset="1" stop-color="#a87a35"/>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke="url(#gold)">
+            <circle cx="100" cy="100" r="92" stroke-width="2.4"/>
+            <circle cx="100" cy="100" r="84" stroke-width="1" stroke-dasharray="1.5 4"/>
+            <circle cx="100" cy="100" r="58" stroke-width="2"/>
+            <ellipse cx="100" cy="100" rx="24" ry="58" stroke-width="1.3"/>
+            <ellipse cx="100" cy="100" rx="44" ry="58" stroke-width="1"/>
+            <path d="M42 100h116M48 72h104M48 128h104" stroke-width="1"/>
+            <path d="M38 152 Q100 186 162 152" stroke-width="1.4"/>
+            <path d="M38 48 Q100 14 162 48" stroke-width="1.4"/>
+          </g>
+          <g fill="url(#gold)" font-family="Geist Mono, monospace" font-weight="600" font-size="13" text-anchor="middle">
+            <text x="100" y="35">한</text><text x="40" y="106">En</text><text x="160" y="106">中</text>
+          </g>
+          <path d="M100 150 l4 9 10 1 -8 6 3 10 -9 -6 -9 6 3 -10 -8 -6 10 -1z" fill="url(#gold)" transform="translate(0 2) scale(1)" />
+        </svg>
+        <h1 class="cv-name"><span class="cv-name-ko foil">홍진효</span><span class="cv-name-en">Hong Jinhyo — <i>Jin</i></span></h1>
+        <p class="sr">말은 달라도, 뜻은 하나로. — Different words. One meaning. — 言语不同，心意相通。</p>
+        <p class="cv-statement" aria-hidden="true"><span class="cvs-tag mono">KOR</span><span class="cvs-text" lang="ko">말은 달라도, 뜻은 하나로.</span></p>
+        <p class="cv-lede" data-i18n="hero.lede">세 개의 언어로, 현장의 대화를 매끄럽게 연결합니다.</p>
+        <p class="cv-bottom mono"><span>KOR · ENG · 中</span><span>Singapore</span></p>
+      </div>
+    </section>
+
+    <!-- Inside front cover -->
+    <section class="page pg-inside" data-page="inside" data-label="Introduction">
+      <div class="in">
+        <p class="pg-kicker mono"><b>P.01</b> — Introduction</p>
+        <h2 class="in-quote" data-i18n="intro.quote">전시장에서, 협상 테이블에서, 진료실에서, 공연장에서 — 그리고 실전 훈련 현장에서.</h2>
+        <p class="in-body" data-i18n="intro.p1">한국어·영어·중국어를 모두 <strong>원어민 수준</strong>으로 구사하는 트라이링구얼 통역사입니다. 중국 쑤저우에서 학창 시절을 보내며 익힌 중국어는 일상 회화를 넘어 <strong>고문(문언문) 독해</strong>까지 가능하고, 현재는 싱가포르 SMU에서 금융을 전공하며 <strong>비즈니스 현장의 언어</strong>를 함께 익히고 있습니다.</p>
+        <p class="in-body" data-i18n="intro.p2">Seafood Expo Asia·IDEM·FHA 등 싱가포르 국제 박람회 부스 통역, PLAVE 콘서트 현장의 네트워크·운영 통역, 언론중재위원회의 NTU 전문가 인터뷰 통역, LG CNS의 글로벌 뱅킹 기술 통역, 피부과 클리닉 의료 통역, 한미 연합훈련 통역병 복무까지 — 다양한 환경에서 <strong>실시간 통역</strong>을 수행해왔습니다.</p>
+        <div class="in-stats">
+          <div><span class="in-n">03</span><span class="in-l" data-i18n="stat.1">구사 언어</span></div>
+          <div><span class="in-n">05</span><span class="in-l" data-i18n="stat.2">2026 싱가포르 현장 통역</span></div>
+          <div><span class="in-n"><sup>~</sup>30</span><span class="in-l" data-i18n="stat.3">의료 통역 하루 응대 고객</span></div>
+          <div><span class="in-n">15</span><span class="in-l" data-i18n="stat.4">분대장으로 이끈 분대원</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bio data page -->
+    <section class="page pg-bio" data-page="bio" data-label="Identity">
+      <div class="bio">
+        <p class="pg-head mono"><span>Passport · 여권 · 护照</span><span>Type P · KOR/ENG/中</span></p>
+        <div class="bio-grid">
+          <div class="bio-photo">
+            <img src="../../assets/portrait.jpg" alt="홍진효 프로필 사진 / Portrait of Hong Jinhyo" width="600" height="600">
+            <span class="holo" aria-hidden="true"></span>
+          </div>
+          <dl class="bio-f">
+            <div><dt>성 / Surname / 姓</dt><dd class="bf-big">HONG</dd></div>
+            <div><dt>이름 / Given names / 名</dt><dd class="bf-big">JINHYO <small>(JIN)</small></dd></div>
+            <div><dt>성명 / Name / 姓名</dt><dd lang="ko">홍진효</dd></div>
+            <div class="bf-row">
+              <div><dt>Based</dt><dd>Singapore</dd></div>
+              <div><dt>Study</dt><dd>SMU — Finance</dd></div>
+            </div>
+            <div><dt>Raised</dt><dd>Suzhou, China — 2018–22</dd></div>
+            <div><dt>Served</dt><dd>ROK Army — Interpreter</dd></div>
+          </dl>
+        </div>
+        <div class="bio-langs">
+          <p class="bl-title mono" data-i18n="lang.title">세 개의 언어, 하나의 목소리.</p>
+          <div class="bl-row"><span class="bl-g" lang="ko" aria-hidden="true">한</span><span class="bl-n" lang="ko">한국어</span><span class="bl-lv mono">Native</span><span class="bl-d" data-i18n="lang.ko">모국어</span></div>
+          <div class="bl-row"><span class="bl-g" lang="en" aria-hidden="true">En</span><span class="bl-n" lang="en">English</span><span class="bl-lv mono">Native</span><span class="bl-d" data-i18n="lang.en">국제학교 · IB 디플로마</span></div>
+          <div class="bl-row"><span class="bl-g" lang="zh-Hans" aria-hidden="true">中</span><span class="bl-n" lang="zh-Hans">中文</span><span class="bl-lv mono">Native+</span><span class="bl-d" data-i18n="lang.zh">고문(문언문) 독해 가능 · HSK 6급</span></div>
+        </div>
+        <p class="bio-sign" aria-hidden="true">Jin</p>
+        <p class="mrz mono" aria-hidden="true"><span>P&lt;KORHONG&lt;&lt;JINHYO&lt;&lt;JIN&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span><span>INTERPRETER&lt;KOR&lt;ENG&lt;ZHO&lt;&lt;SINGAPORE&lt;&lt;2026&lt;8</span></p>
+      </div>
+    </section>
+
+    <!-- ===== VISAS (experience) ===== -->
+    <article class="page visa" data-page="visa" data-n="1" data-label="PLAVE · Singapore EXPO">
+      <div class="pg-visual">
+        <p class="pv-head mono"><span>Visa 01 / 08</span><span><span class="hanja" aria-hidden="true">演</span> Live concert · K-POP</span></p>
+        <figure class="media panel poster-panel">
+          <span class="big-glyph hanja" aria-hidden="true">演</span>
+          <img class="poster" src="../../assets/plave-keep-it-manic.webp" alt="2026 PLAVE World Tour ‘Keep It Manic’ in Singapore 공식 포스터" loading="lazy" width="956" height="1196">
+          <span class="m-tag mono">Official poster</span>
+        </figure>
+        <div class="stamp" data-shape="circle" data-ink="#c8321e" data-code="SIN" data-place="SINGAPORE EXPO" data-date="2026.10.15 — 17" data-glyph="演" data-mode="KO ⇄ EN · 中" data-no="01" data-rot="-9" data-x="60" data-y="74"></div>
+        <p class="pv-cap mono"><b>KO ⇄ EN · 中</b><span>PLAVE LIVE Production</span></p>
+      </div>
+      <div class="pg-text">
+        <p class="pt-head mono"><span class="e-no">01 / 08</span><span class="e-date">2026.10.15 — 17</span></p>
+        <h3 class="e-org">2026 PLAVE World Tour <i>Keep It Manic</i> in Singapore</h3>
+        <p class="e-place mono">APEX @ EXPO · Singapore EXPO</p>
+        <p class="e-role" data-i18n="w0.role">공연 현장 통역 요원 · 네트워크·운영</p>
+        <p class="e-desc" data-i18n="w0.desc">한국 제작진과 현지 프로모터·스태프 사이에서 한국어·영어·중국어로 네트워크 및 운영 통역을 담당했습니다. 3일간 한국 엔지니어와 현지 IT·운영 인력의 기술 협의와 현장 운영 소통을 실시간으로 연결했고, 이슈가 빠르게 오가는 공연 환경에서 양측의 의사를 중립적으로 정확히 전달하는 데 집중했습니다.</p>
+      </div>
+    </article>
+
+    <article class="page visa" data-page="visa" data-n="2" data-label="Press Arbitration · NTU">
+      <div class="pg-visual">
+        <p class="pv-head mono"><span>Visa 02 / 08</span><span><span class="hanja" aria-hidden="true">仲</span> Media policy · Research interview</span></p>
+        <figure class="media panel logo-pair">
+          <span class="big-glyph hanja" aria-hidden="true">仲</span>
+          <span class="logo-tile"><img src="../../assets/pac-logo.png" alt="언론중재위원회 Press Arbitration Commission" loading="lazy" width="480" height="339"></span>
+          <span class="pair-x mono" aria-hidden="true">KO ⇄ EN</span>
+          <span class="logo-tile"><img src="../../assets/ntu-logo.png" alt="Nanyang Technological University" loading="lazy" width="738" height="264"></span>
+        </figure>
+        <div class="stamp" data-shape="rect" data-ink="#1f4e9a" data-code="SIN" data-place="NTU · SINGAPORE" data-date="2026.10.01" data-glyph="仲" data-mode="KO ⇄ EN" data-no="02" data-rot="6" data-x="50" data-y="78"></div>
+        <p class="pv-cap mono"><b>KO ⇄ EN</b><span>Expert interviews ×2 · NTU</span></p>
+      </div>
+      <div class="pg-text">
+        <p class="pt-head mono"><span class="e-no">02 / 08</span><span class="e-date">2026.10.01</span></p>
+        <h3 class="e-org">Press Arbitration Commission <i>at NTU</i></h3>
+        <p class="e-place mono">Wee Kim Wee School of Comm. &amp; Information · NTU</p>
+        <p class="e-role" data-i18n="w8.role">연구 인터뷰 통역 (한-영 순차) · 언론중재위원회 해외 조사</p>
+        <p class="e-desc" data-i18n="w8.desc">한국 언론중재위원회의 싱가포르 현지 조사에 동행해, NTU 커뮤니케이션 학부 교수진과의 전문가 인터뷰 두 건을 한-영 순차 통역했습니다. 사전에 위원회 영문 자료와 질문지로 조정·중재·정정보도 등 언론 분쟁 용어를 정리했고, 싱가포르의 언론 피해 구제 방식, 플랫폼 확산에 따른 정정보도의 한계, POFMA, 뉴스 제작에 AI가 쓰이며 생기는 쟁점 같은 정책·학술 논의를 정확히 옮겼습니다.</p>
+      </div>
+    </article>
+
+    <article class="page visa" data-page="visa" data-n="3" data-label="Seafood Expo Asia">
+      <div class="pg-visual">
+        <p class="pv-head mono"><span>Visa 03 / 08</span><span><span class="hanja" aria-hidden="true">海</span> Seafood · F&amp;B</span></p>
+        <figure class="media">
+          <img class="ph" src="../../assets/seafood-expo.jpg" alt="Seafood Expo Asia 2026 해청정 부스에서 제품을 소개하는 모습" loading="lazy" width="1100" height="1214" style="object-position:50% 22%">
+        </figure>
+        <div class="stamp" data-shape="oval" data-ink="#0f6f78" data-code="SIN" data-place="SANDS EXPO · SECC" data-date="2026.09.02 — 04" data-glyph="海" data-mode="KO ⇄ 中" data-no="03" data-rot="-5" data-x="56" data-y="76"></div>
+        <p class="pv-cap mono"><b>KO ⇄ 中</b><span>Hae Cheong Jeong · Korea Pavilion</span></p>
+      </div>
+      <div class="pg-text">
+        <p class="pt-head mono"><span class="e-no">03 / 08</span><span class="e-date">2026.09.02 — 04</span></p>
+        <h3 class="e-org">Seafood Expo Asia <i>2026</i></h3>
+        <p class="e-place mono">Sands Expo &amp; Convention Centre · Singapore</p>
+        <p class="e-role" data-i18n="w1.role">전시 통역 요원 (중국어) · 해청정 부스, 한국관</p>
+        <p class="e-desc" data-i18n="w1.desc">전시대행사 하이퍼스를 통해 한국관 참가사 해청정(해초미인) 부스의 중국어 통역을 전담했습니다. 해초·두부·다시마·검은콩 면 등 즉석 저칼로리 건강면 제품군의 특징(글루텐프리·비건 인증, 4無 무첨가, 상온 보관)을 사전에 숙지한 뒤, 3일간 부스를 찾은 중국어권 바이어를 대상으로 제품 소개와 상담을 통역하고 수출상담 일지를 작성했습니다.</p>
+      </div>
+    </article>
+
+    <article class="page visa" data-page="visa" data-n="4" data-label="FHA · Food &amp; Hospitality">
+      <div class="pg-visual">
+        <p class="pv-head mono"><span>Visa 04 / 08</span><span><span class="hanja" aria-hidden="true">酒</span> Traditional liquor · F&amp;B</span></p>
+        <figure class="media">
+          <img class="ph" src="../../assets/fha.jpg" alt="FHA 2026 신평양조장 부스에서 바이어와 함께한 모습" loading="lazy" width="1200" height="675" style="object-position:34% 50%">
+        </figure>
+        <div class="stamp" data-shape="oct" data-ink="#6a3d8f" data-code="SIN" data-place="SINGAPORE EXPO" data-date="2026.04.21 — 23" data-glyph="酒" data-mode="KO ⇄ EN · 中" data-no="04" data-rot="8" data-x="58" data-y="74"></div>
+        <p class="pv-cap mono"><b>KO ⇄ EN · 中</b><span>Sinpyeong Brewery</span></p>
+      </div>
+      <div class="pg-text">
+        <p class="pt-head mono"><span class="e-no">04 / 08</span><span class="e-date">2026.04.21 — 23</span></p>
+        <h3 class="e-org">FHA — Food &amp; Hospitality Asia <i>2026</i></h3>
+        <p class="e-place mono">Singapore EXPO</p>
+        <p class="e-role" data-i18n="w2.role">전시 통역 요원 · 신평양조장</p>
+        <p class="e-desc" data-i18n="w2.desc">전통주 브랜드의 해외 진출을 지원하는 통역으로 참여, 제품 소개부터 현지 디스트리뷰터와의 실질적인 비즈니스 미팅까지 영어와 중국어로 통역했습니다. 단순 언어 전달을 넘어 중국계 바이어와의 상담에서 신뢰를 쌓는 데 집중했으며, 상담 일지 작성을 보조해 담당자가 미팅 후에도 협상 맥락을 정확히 파악할 수 있도록 했습니다.</p>
+      </div>
+    </article>
+
+    <article class="page visa" data-page="visa" data-n="5" data-label="IDEM Singapore">
+      <div class="pg-visual">
+        <p class="pv-head mono"><span>Visa 05 / 08</span><span><span class="hanja" aria-hidden="true">齒</span> Dental AI · Medtech</span></p>
+        <figure class="media">
+          <img class="ph" src="../../assets/idem.jpg" alt="IDEM Singapore 2026 innoDtech 부스 상담 통역 모습" loading="lazy" width="1200" height="675" style="object-position:30% 50%">
+        </figure>
+        <div class="stamp" data-shape="rect" data-ink="#b8323f" data-code="SIN" data-place="MARINA BAY SANDS" data-date="2026.04.17 — 19" data-glyph="齒" data-mode="KO ⇄ EN · 中" data-no="05" data-rot="-7" data-x="54" data-y="76"></div>
+        <p class="pv-cap mono"><b>KO ⇄ EN · 中</b><span>innoDtech · Dr.AlignNavi</span></p>
+      </div>
+      <div class="pg-text">
+        <p class="pt-head mono"><span class="e-no">05 / 08</span><span class="e-date">2026.04.17 — 19</span></p>
+        <h3 class="e-org">IDEM Singapore <i>2026</i></h3>
+        <p class="e-place mono">Marina Bay Sands · Singapore</p>
+        <p class="e-role" data-i18n="w3.role">전시 통역 요원 · innoDtech</p>
+        <p class="e-desc" data-i18n="w3.desc">한국 치과 AI 스타트업의 부스 통역을 담당하며, 3일간 부스를 방문한 국내외 바이어와 참관객을 대상으로 한국어-영어 통역을 수행했습니다. 특히 부스를 찾은 중국계 클라이언트 및 협력사와의 상담에서는 중국어로 직접 응대하며 언어 장벽 없는 커뮤니케이션을 이끌었습니다. 사전에 치과의료기기 관련 전문 용어를 숙지해 제품 설명의 정확도를 높였고, 상담 내용을 빠짐없이 기록해 사후 팔로우업이 가능하도록 지원했습니다.</p>
+      </div>
+    </article>
+
+    <article class="page visa" data-page="visa" data-n="6" data-label="LG CNS Singapore">
+      <div class="pg-visual">
+        <p class="pv-head mono"><span>Visa 06 / 08</span><span><span class="hanja" aria-hidden="true">金</span> Banking IT · Cloud</span></p>
+        <figure class="media panel logo-one">
+          <span class="big-glyph hanja" aria-hidden="true">金</span>
+          <img class="logo" src="../../assets/lgcns.png" alt="LG CNS" loading="lazy" width="320" height="320">
+          <span class="m-tag mono classified">Client-Confidential</span>
+        </figure>
+        <div class="stamp" data-shape="circle" data-ink="#23305e" data-code="SIN" data-place="APAC · CLIENT-CONFIDENTIAL" data-date="2026.05 — 2026.07" data-glyph="金" data-mode="KO ⇄ EN" data-no="06" data-rot="11" data-x="60" data-y="78"></div>
+        <p class="pv-cap mono"><b>KO ⇄ EN</b><span>Global banking · APAC</span></p>
+      </div>
+      <div class="pg-text">
+        <p class="pt-head mono"><span class="e-no">06 / 08</span><span class="e-date">2026.05 — 2026.07</span></p>
+        <h3 class="e-org">LG CNS <i>Singapore</i></h3>
+        <p class="e-place mono">Client-confidential project · APAC</p>
+        <p class="e-role" data-i18n="w4.role">Client Engagement Intern · 비즈니스·기술 통역</p>
+        <p class="e-desc" data-i18n="w4.desc">APAC 지역 글로벌 뱅킹 클라이언트를 대상으로 한 IT 및 클라우드 아키텍처 프로젝트에서 통역을 담당했습니다. 기술 미팅 특성상 도메인 지식과 정확한 용어 이해가 필수적인 환경에서, 복잡한 기술 논의를 실시간으로 정확하게 전달하는 역량을 쌓았습니다. 박람회 통역과는 결이 다른, 고난도 비즈니스·기술 통역 경험입니다.</p>
+      </div>
+    </article>
+
+    <article class="page visa" data-page="visa" data-n="7" data-label="IH Clinic · Seoul">
+      <div class="pg-visual">
+        <p class="pv-head mono"><span>Visa 07 / 08</span><span><span class="hanja" aria-hidden="true">醫</span> Aesthetic medicine</span></p>
+        <figure class="media panel logo-one">
+          <span class="big-glyph hanja" aria-hidden="true">醫</span>
+          <img class="logo plain" src="../../assets/ih-clinic.png" alt="IH Clinic" loading="lazy" width="336" height="288">
+          <span class="m-tag mono">Dermatology · ~30 clients / day</span>
+        </figure>
+        <div class="stamp" data-shape="hex" data-ink="#1c7a55" data-code="SEL" data-place="SEOUL" data-date="2025.04 — 2025.05" data-glyph="醫" data-mode="KO ⇄ 中" data-no="07" data-rot="-10" data-x="52" data-y="78"></div>
+        <p class="pv-cap mono"><b>KO ⇄ 中</b><span>Dermatology · ~30 clients / day</span></p>
+      </div>
+      <div class="pg-text">
+        <p class="pt-head mono"><span class="e-no">07 / 08</span><span class="e-date">2025.04 — 2025.05</span></p>
+        <h3 class="e-org">IH Clinic <i>Seoul</i></h3>
+        <p class="e-place mono">Dermatology clinic · Seoul</p>
+        <p class="e-role" data-i18n="w5.role">한-중 의료 통역 · 원장 및 의료진 직접 통역</p>
+        <p class="e-desc" data-i18n="w5.desc">피부과 전문 클리닉에서 원장 및 의료진과 중국어권 고객 사이의 실시간 한-중 의료 통역을 담당했습니다. 보톡스·필러·스킨부스터 등 주사 시술, 울쎄라·텐쎄라·써마지 등 리프팅·레이저 기기 시술, 영양주사와 미백주사 등 수액 시술 전 과정에서 상담부터 시술 중 안내, 사후 주의사항까지 통역하며 하루 약 30명의 고객을 응대했습니다. 시술 부위, 용량, 부작용처럼 오역이 곧 안전 문제로 이어지는 의료 용어를 정확히 전달하는 데 집중했습니다.</p>
+      </div>
+    </article>
+
+    <article class="page visa" data-page="visa" data-n="8" data-label="ROK Army · ROK–US">
+      <div class="pg-visual">
+        <p class="pv-head mono"><span>Visa 08 / 08</span><span><span class="hanja" aria-hidden="true">軍</span> Joint operations · Defense</span></p>
+        <figure class="media">
+          <img class="ph" src="../../assets/rok-us.jpg" alt="한미연합훈련 작전 브리핑 통역 모습" loading="lazy" width="540" height="360" style="object-position:100% 50%">
+        </figure>
+        <div class="stamp" data-shape="rect" data-ink="#34392b" data-code="ROK" data-place="ROK–US COMBINED EXERCISE" data-date="2023.10 — 2025.04" data-glyph="軍" data-mode="KO ⇄ EN" data-no="08" data-rot="4" data-x="56" data-y="74"></div>
+        <p class="pv-cap mono"><b>KO ⇄ EN</b><span>ROK–US Combined Exercise</span></p>
+      </div>
+      <div class="pg-text">
+        <p class="pt-head mono"><span class="e-no">08 / 08</span><span class="e-date">2023.10 — 2025.04</span></p>
+        <h3 class="e-org" data-i18n="w6.org">대한민국 육군</h3>
+        <p class="e-place mono">Capital Mechanized Infantry Division · ROK</p>
+        <p class="e-role" data-i18n="w6.role">K1A2 전차 포수 · 통역병 · 분대장</p>
+        <p class="e-role" data-i18n="w6.role2">한미 연합작전 통역 · 1년 7개월</p>
+        <p class="e-desc" data-i18n="w6.desc">복무 기간 전반에 걸쳐 한미 연합훈련 시 미군 측과의 작전 브리핑·현장 커뮤니케이션 통역을 수행하며, 압박감 높은 실전 환경에서 오역이 허용되지 않는 통역 역량을 길렀습니다. 동시에 15명 규모 분대를 이끄는 분대장으로서 팀을 관리했고, 만기 전역으로 복무를 마쳤습니다. 통역 실무와 리더십을 동시에 증명하는 이력입니다.</p>
+      </div>
+    </article>
+
+    <!-- Endorsements -->
+    <section class="page pg-endorse" data-page="endorse" data-label="Endorsements">
+      <div class="en">
+        <p class="pg-kicker mono"><b>Endorsements</b> — Services</p>
+        <h2 class="en-title" data-i18n="svc.title">이런 통역이 가능합니다.</h2>
+        <ol class="en-list">
+          <li><span class="mono">01</span><span data-i18n="svc.1t">부스 방문객 응대</span></li>
+          <li><span class="mono">02</span><span data-i18n="svc.2t">바이어 미팅 통역</span></li>
+          <li><span class="mono">03</span><span data-i18n="svc.3t">수출상담 일지 작성</span></li>
+          <li><span class="mono">04</span><span data-i18n="svc.4t">사전 제품 교육 숙지</span></li>
+          <li><span class="mono">05</span><span data-i18n="svc.5t">의료 통역</span></li>
+          <li><span class="mono">06</span><span data-i18n="svc.6t">비즈니스·기술 통역</span></li>
+          <li><span class="mono">07</span><span data-i18n="svc.7t">공연·대형 행사 운영 통역</span></li>
+          <li><span class="mono">08</span><span data-i18n="svc.8t">학술·정책 인터뷰 통역</span></li>
+        </ol>
+        <div class="en-creds">
+          <div class="cred"><b>HSK 6</b><span>Chinese Proficiency Test (HSK) Level 6</span><em class="mono">Confucius Institute Headquarters · 2021.12</em></div>
+          <div class="cred"><b>IB</b><span>International Baccalaureate Diploma Programme</span><em class="mono">International Baccalaureate · 2022.05</em></div>
+        </div>
+        <p class="en-avail"><span class="mono"><i></i>Available</span><span data-i18n="svc.avail">싱가포르 거주 · 현지 출퇴근 가능 · SECC / MBS / Singapore EXPO 전 지역</span></p>
+      </div>
+    </section>
+
+    <!-- Back page -->
+    <section class="page pg-end" data-page="end" data-label="Route &amp; Contact">
+      <div class="end">
+        <p class="pg-kicker mono"><b>Observations</b></p>
+        <div class="end-tally mono">
+          <div><b>08</b><span>Visas</span></div>
+          <div><b>03</b><span>Languages</span></div>
+          <div><b>03</b><span>Cities</span></div>
+        </div>
+        <p class="end-route mono"><span data-i18n="city.sel">서울</span><i>✈</i><span data-i18n="city.szv">쑤저우</span><i>✈</i><span data-i18n="city.sin">싱가포르</span></p>
+        <div class="end-links">
+          <a class="end-btn mono" href="#route">Route ↓</a>
+          <a class="end-btn solid mono" href="#contact">Contact ↗</a>
+        </div>
+        <p class="end-sign mono">通譯 · Hong Jinhyo · Interpreter</p>
+      </div>
+    </section>
+
+  </div>
+</section>
+
+<!-- ============ ROUTE / GLOBE ============ -->
+<section class="route" id="route" aria-labelledby="routeTitle">
+  <div class="route-stage" id="routeStage">
+    <div class="route-copy">
+      <p class="kicker mono"><b>Flight log</b> — SEL · SZV · SIN</p>
+      <h2 class="route-title" id="routeTitle" data-i18n="lang.title">세 개의 언어, 하나의 목소리.</h2>
+      <ol class="legs" id="legs">
+        <li class="leg" data-from="sel" data-to="szv">
+          <p class="leg-path mono"><span data-i18n="city.sel">서울</span> → <span data-i18n="city.szv">쑤저우</span></p>
+          <p class="leg-date mono">2018.06 — 2022.05</p>
+          <h3 class="leg-t">Suzhou Singapore International School</h3>
+          <p class="leg-d" data-i18n="bg.ssis">중국 쑤저우 소재 — 트라이링구얼 역량의 기반이 된 학창 시절</p>
+        </li>
+        <li class="leg" data-from="szv" data-to="sin">
+          <p class="leg-path mono"><span data-i18n="city.szv">쑤저우</span> → <span data-i18n="city.sin">싱가포르</span></p>
+          <p class="leg-date mono">2022.08 — 2028.12 <em data-i18n="bg.exp">(예정)</em></p>
+          <h3 class="leg-t">Singapore Management University</h3>
+          <p class="leg-d" data-i18n="bg.smu">Business — Finance &amp; International Trade 세부 전공</p>
+        </li>
+        <li class="leg" data-from="sin" data-to="sel">
+          <p class="leg-path mono"><span data-i18n="city.sin">싱가포르</span> → <span data-i18n="city.sel">서울</span></p>
+          <p class="leg-date mono">2023.10 — 2025.05</p>
+          <h3 class="leg-t"><span data-i18n="w6.org">대한민국 육군</span> · IH Clinic</h3>
+          <p class="leg-d" data-i18n="w6.role2">한미 연합작전 통역 · 1년 7개월</p>
+        </li>
+        <li class="leg" data-from="sel" data-to="sin">
+          <p class="leg-path mono"><span data-i18n="city.sel">서울</span> → <span data-i18n="city.sin">싱가포르</span></p>
+          <p class="leg-date mono">2026</p>
+          <h3 class="leg-t">Seafood Expo Asia · FHA · IDEM · NTU · PLAVE</h3>
+          <p class="leg-d"><b class="leg-n">05</b> <span data-i18n="stat.2">2026 싱가포르 현장 통역</span></p>
+        </li>
+      </ol>
+    </div>
+    <div class="globe-box" id="globeBox">
+      <canvas class="globe-canvas" id="globeCanvas" aria-hidden="true"></canvas>
+      <div class="globe-labels" id="globeLabels" aria-hidden="true">
+        <span class="g-lab" data-city="sel"><b>SEL</b><span data-i18n="city.sel">서울</span></span>
+        <span class="g-lab" data-city="szv"><b>SZV</b><span data-i18n="city.szv">쑤저우</span></span>
+        <span class="g-lab" data-city="sin"><b>SIN</b><span data-i18n="city.sin">싱가포르</span></span>
+      </div>
+      <p class="globe-note mono" aria-hidden="true"><span id="legNo">LEG 1 / 4</span></p>
+    </div>
+  </div>
+  <div class="route-steps" id="routeSteps" aria-hidden="true"></div>
+</section>
+
+<!-- ============ CONTACT / BOARDING PASS ============ -->
+<section class="contact" id="contact" aria-labelledby="contactTitle">
+  <div class="wrap">
+    <p class="kicker mono"><b>Boarding</b> — Contact</p>
+
+    <div class="pass" id="pass">
+      <div class="pass-main">
+        <div class="pass-top mono">
+          <span class="pass-brand"><span class="seal-mini hanja" aria-hidden="true"><span>通</span><span>譯</span></span>Boarding Pass · 탑승권 · 登机牌</span>
+          <span>HJ 2026</span>
+        </div>
+        <h2 class="pass-title" id="contactTitle" data-i18n="contact.title">함께 일해요.</h2>
+        <p class="pass-text" data-i18n="contact.text">박람회·행사 통역 문의는 아래 연락처로 편하게 남겨주세요. 싱가포르 현지에서 바로 투입 가능하며, 빠르게 회신드리겠습니다.</p>
+        <div class="pass-route mono" aria-hidden="true">
+          <div><small>From</small><b>ANY</b><span>Your event</span></div>
+          <span class="pass-plane">✈</span>
+          <div><small>To</small><b>SIN</b><span>Singapore</span></div>
+          <div class="pass-meta"><small>Gate</small><b>SECC · MBS · EXPO</b></div>
+          <div class="pass-meta"><small>Class</small><b>KOR / ENG / 中</b></div>
+        </div>
+        <div class="c-rows">
+          <div class="c-row">
+            <span class="mono c-k">Email</span>
+            <a class="c-val" href="mailto:hongjinhyotop@gmail.com">hongjinhyotop@gmail.com</a>
+            <button type="button" class="copy mono" data-copy="hongjinhyotop@gmail.com" data-i18n="ui.copy">복사</button>
+          </div>
+          <div class="c-row">
+            <span class="mono c-k">Call</span>
+            <a class="c-val" href="tel:+6588245713">+65 8824 5713</a>
+            <button type="button" class="copy mono" data-copy="+6588245713" data-i18n="ui.copy">복사</button>
+          </div>
+          <div class="c-row">
+            <span class="mono c-k">KakaoTalk ID</span>
+            <span class="c-val">HONGJINHYO2003</span>
+            <button type="button" class="copy mono" data-copy="HONGJINHYO2003" data-i18n="ui.copy">복사</button>
+          </div>
+        </div>
+      </div>
+      <div class="pass-perf" aria-hidden="true"></div>
+      <div class="stub-slot" id="stubSlot">
+        <button type="button" class="stub" id="stub" data-copy="hongjinhyotop@gmail.com" aria-describedby="stubHint">
+          <span class="stub-in">
+            <span class="stub-top mono"><span>Email</span><span>✂</span></span>
+            <span class="stub-mail">hongjinhyotop<wbr>@gmail.com</span>
+            <span class="stub-bar" aria-hidden="true"></span>
+            <span class="stub-hint mono" id="stubHint" data-i18n="ui.tear">찢으면 이메일이 복사됩니다</span>
+          </span>
+        </button>
+        <span class="stub-ghost mono" aria-hidden="true">hongjinhyotop@gmail.com</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in mono">
+    <a class="brand" href="#top"><span class="seal-mini hanja" aria-hidden="true"><span>通</span><span>譯</span></span><span>Hong Jinhyo — Interpreter</span></a>
+    <span>KOR / ENG / 中 — Singapore</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<div class="toast mono" id="toast" role="status" aria-live="polite"></div>
+
+<noscript><style>.pp-pages{display:block!important}.stamp{display:none}</style></noscript>
+
+<script src="i18n.js"></script>
+<script src="land.js"></script>
+<script src="passport.js"></script>
+</body>
+</html>
