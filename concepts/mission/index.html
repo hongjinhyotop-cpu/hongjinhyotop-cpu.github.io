@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MISSION LOG — 홍진효 Hong Jinhyo · Trilingual Interpreter</title>
+<meta name="description" content="한국어·영어·중국어 트라이링구얼 통역사 홍진효 — MISSION LOG 콘셉트 시제품.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#06080b">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
+<script>
+  document.documentElement.classList.add('js');
+  // safety net: if the app script never runs, show everything
+  setTimeout(function(){ if (!window.__missionOK) document.documentElement.classList.add('nofx'); }, 3500);
+</script>
+<link rel="stylesheet" href="mission.css">
+</head>
+<body>
+
+<a class="skip" href="#quests">Skip to quest log</a>
+
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="scanlines" aria-hidden="true"></div>
+
+<!-- ============ BOOT ============ -->
+<div class="boot" id="boot" aria-hidden="true">
+  <div class="boot-box">
+    <p class="boot-logo"><span class="emb hanja">通譯</span>MISSION&nbsp;LOG <small>v26.11</small></p>
+    <ol class="boot-lines">
+      <li>&gt; operative ............ <b>HONG JINHYO</b></li>
+      <li>&gt; languages ............ <b>KOR · ENG · 中文</b></li>
+      <li>&gt; base ................. <b>SINGAPORE</b></li>
+      <li>&gt; quest log ............ <b>08 ENTRIES</b></li>
+    </ol>
+    <div class="boot-bar"><i></i></div>
+    <p class="boot-skip">PRESS ANY KEY</p>
+  </div>
+</div>
+
+<!-- ============ HUD ============ -->
+<header class="hud" id="hud">
+  <div class="hud-row">
+    <a class="brand" href="#select" aria-label="Hong Jinhyo — top">
+      <span class="emb hanja" aria-hidden="true">通譯</span>
+      <span class="brand-t"><b>HONG JINHYO</b><small>Trilingual Interpreter</small></span>
+    </a>
+
+    <nav class="hud-nav" aria-label="Sections">
+      <a href="#select" data-nav="select"><span data-ui="nav.select">캐릭터</span></a>
+      <a href="#quests" data-nav="quests"><span data-ui="nav.quests">퀘스트</span></a>
+      <a href="#achievements" data-nav="achievements"><span data-ui="nav.ach">업적</span></a>
+      <a href="#skills" data-nav="skills"><span data-ui="nav.skills">스킬</span></a>
+      <a href="#contact" data-nav="contact"><span data-ui="nav.contact">연락</span></a>
+    </nav>
+
+    <div class="hud-right">
+      <div class="langs" role="group" aria-label="Language" data-active="ko">
+        <span class="ind" aria-hidden="true"></span>
+        <button type="button" data-lang="ko" aria-pressed="true" lang="ko">KOR</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en">ENG</button>
+        <button type="button" data-lang="zh" aria-pressed="false" lang="zh-Hans">中文</button>
+      </div>
+      <button type="button" class="hud-btn" id="sfxBtn" aria-pressed="false" aria-label="Sound effects">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9h4l5-4v14l-5-4H4z"/><path class="on" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="off" d="M16 9l5 6M21 9l-5 6"/></svg>
+        <span class="hud-btn-t">SFX</span>
+      </button>
+      <button type="button" class="hud-btn fxbtn" id="fxBtn" aria-pressed="true" aria-label="Visual effects: full or lite">
+        <span class="hud-btn-t">FX <b id="fxState">FULL</b></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="xp" id="xp">
+    <button type="button" class="lv" id="lvBtn" aria-label="Level"><span>LV</span><b id="lvNum">01</b></button>
+    <div class="xp-track" aria-hidden="true"><i class="xp-fill" id="xpFill"></i><i class="xp-ghost" id="xpGhost"></i></div>
+    <span class="xp-num"><b id="xpNum">0</b> / 8,000 EXP</span>
+    <span class="xp-flash" id="xpFlash" aria-hidden="true"></span>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ CHARACTER SELECT ============ -->
+<section class="sec hero" id="select" data-sec="select">
+  <div class="floor" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-top">
+      <p class="kicker"><span class="kb">[ 00 ]</span> MISSION LOG <span class="sl">//</span> <span data-ui="sel.kicker">언어를 선택하세요</span></p>
+      <p class="kicker dim hide-sm">SINGAPORE · 2026 · KOR / ENG / 中</p>
+    </div>
+
+    <p class="sr">말은 달라도, 뜻은 하나로. — Different words. One meaning. — 言语不同，心意相通。</p>
+    <p class="statement" id="statement" aria-hidden="true"><span class="st-line">말은 달라도,</span><span class="st-line">뜻은 하나로.</span></p>
+
+    <div class="select-grid">
+      <!-- operative -->
+      <article class="op panel" id="operative">
+        <div class="op-photo">
+          <img src="../../assets/portrait.jpg" alt="홍진효 프로필 사진 / Portrait of Hong Jinhyo" width="600" height="600">
+          <span class="op-tag">OPERATIVE</span>
+          <span class="reticle" aria-hidden="true"></span>
+        </div>
+        <div class="op-id">
+          <h1 class="op-name"><span class="hn-ko">홍진효</span><span class="hn-en">Hong Jinhyo — <i>Jin</i></span></h1>
+          <p class="op-class">CLASS · Trilingual Interpreter</p>
+        </div>
+        <p class="op-lede" data-i18n="hero.lede">세 개의 언어로, 현장의 대화를 매끄럽게 연결합니다.</p>
+        <dl class="facts">
+          <div><dt>Based</dt><dd>Singapore</dd></div>
+          <div><dt>Raised</dt><dd>Suzhou, China — 2018–22</dd></div>
+          <div><dt>Study</dt><dd>SMU — Finance</dd></div>
+          <div><dt>Served</dt><dd>ROK Army — Interpreter</dd></div>
+        </dl>
+        <div class="attrs">
+          <div class="attr"><b class="num" data-count="3">03</b><span data-i18n="stat.1">구사 언어</span></div>
+          <div class="attr"><b class="num" data-count="5">05</b><span data-i18n="stat.2">2026 싱가포르 현장 통역</span></div>
+          <div class="attr"><b class="num" data-count="30" data-pre="~">~30</b><span data-i18n="stat.3">의료 통역 하루 응대 고객</span></div>
+          <div class="attr"><b class="num" data-count="15">15</b><span data-i18n="stat.4">분대장으로 이끈 분대원</span></div>
+        </div>
+      </article>
+
+      <!-- characters = languages -->
+      <div class="chars" role="group" aria-label="Language select / 언어 선택 / 选择语言">
+        <button type="button" class="char" data-lang="ko" aria-pressed="true" style="--c:var(--ko)">
+          <span class="char-slot">P1</span>
+          <span class="char-sel" data-ui="sel.selected">선택됨</span>
+          <span class="char-glyph" lang="ko" aria-hidden="true">한</span>
+          <span class="char-name" lang="ko">한국어</span>
+          <span class="char-rank">NATIVE</span>
+          <span class="char-stats">
+            <span class="cs"><span class="cs-l" data-ui="sel.prof">숙련도</span><span class="cs-bar"><i style="--v:1"></i></span><span class="cs-v">Native</span></span>
+            <span class="cs"><span class="cs-l" data-ui="sel.quests">퀘스트</span><span class="cs-bar seg"><i style="--v:1"></i></span><span class="cs-v">8 / 8</span></span>
+          </span>
+          <span class="char-cred"><span data-i18n="lang.ko">모국어</span></span>
+        </button>
+        <button type="button" class="char" data-lang="en" aria-pressed="false" style="--c:var(--en)">
+          <span class="char-slot">P2</span>
+          <span class="char-sel" data-ui="sel.selected">선택됨</span>
+          <span class="char-glyph" lang="en" aria-hidden="true">En</span>
+          <span class="char-name" lang="en">English</span>
+          <span class="char-rank">NATIVE</span>
+          <span class="char-stats">
+            <span class="cs"><span class="cs-l" data-ui="sel.prof">숙련도</span><span class="cs-bar"><i style="--v:1"></i></span><span class="cs-v">Native</span></span>
+            <span class="cs"><span class="cs-l" data-ui="sel.quests">퀘스트</span><span class="cs-bar seg"><i style="--v:.75"></i></span><span class="cs-v">6 / 8</span></span>
+          </span>
+          <span class="char-cred"><span data-i18n="lang.en">국제학교 · IB 디플로마</span><small>IB Diploma · 2022.05</small></span>
+        </button>
+        <button type="button" class="char plus" data-lang="zh" aria-pressed="false" style="--c:var(--zh)">
+          <span class="char-slot">P3</span>
+          <span class="char-sel" data-ui="sel.selected">선택됨</span>
+          <span class="char-glyph" lang="zh-Hans" aria-hidden="true">中</span>
+          <span class="char-name" lang="zh-Hans">中文</span>
+          <span class="char-rank">NATIVE<em>+</em></span>
+          <span class="char-stats">
+            <span class="cs"><span class="cs-l" data-ui="sel.prof">숙련도</span><span class="cs-bar over"><i style="--v:1"></i></span><span class="cs-v">Native+</span></span>
+            <span class="cs"><span class="cs-l" data-ui="sel.quests">퀘스트</span><span class="cs-bar seg"><i style="--v:.625"></i></span><span class="cs-v">5 / 8</span></span>
+          </span>
+          <span class="char-cred"><span data-i18n="lang.zh">고문(문언문) 독해 가능 · HSK 6급</span><small>HSK 6 · 2021.12</small><q class="classic" lang="zh-Hant">言必信，行必果。<cite>《論語 · 子路》</cite></q></span>
+        </button>
+      </div>
+      <div class="hero-cta">
+        <p class="hint"><span class="key">◀ ▶</span> <span data-ui="sel.hint">카드를 고르면 사이트 언어가 바뀝니다</span></p>
+        <div class="cta-row">
+          <a class="btn primary" href="#quests"><span class="btn-k">A</span><span data-ui="sel.start">미션 시작</span></a>
+          <a class="btn" href="#contact"><span class="btn-k">B</span><span data-ui="sel.hire">통역 의뢰</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ BRIEFING ============ -->
+<section class="sec brief" id="brief" data-sec="select">
+  <div class="wrap">
+    <div class="brief-grid panel rv">
+      <div>
+        <p class="kicker"><span class="kb">[ 01 ]</span> <span data-ui="brief.kicker">미션 브리핑</span></p>
+        <h2 class="brief-q" data-i18n="intro.quote">전시장에서, 협상 테이블에서, 진료실에서, 공연장에서 — 그리고 실전 훈련 현장에서.</h2>
+      </div>
+      <div class="brief-body">
+        <p data-i18n="intro.p1">한국어·영어·중국어를 모두 <strong>원어민 수준</strong>으로 구사하는 트라이링구얼 통역사입니다. 중국 쑤저우에서 학창 시절을 보내며 익힌 중국어는 일상 회화를 넘어 <strong>고문(문언문) 독해</strong>까지 가능하고, 현재는 싱가포르 SMU에서 금융을 전공하며 <strong>비즈니스 현장의 언어</strong>를 함께 익히고 있습니다.</p>
+        <p data-i18n="intro.p2">Seafood Expo Asia·IDEM·FHA 등 싱가포르 국제 박람회 부스 통역, PLAVE 콘서트 현장의 네트워크·운영 통역, 언론중재위원회의 NTU 전문가 인터뷰 통역, LG CNS의 글로벌 뱅킹 기술 통역, 피부과 클리닉 의료 통역, 한미 연합훈련 통역병 복무까지 — 다양한 환경에서 <strong>실시간 통역</strong>을 수행해왔습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUEST LOG ============ -->
+<section class="sec quests" id="quests" data-sec="quests">
+  <div class="wrap">
+    <header class="sec-head rv">
+      <div>
+        <p class="kicker"><span class="kb">[ 02 ]</span> QUEST LOG <span class="sl">//</span> <span data-ui="q.kicker">경력</span></p>
+        <h2 class="title" data-i18n="work.title">현장이 증명합니다.</h2>
+      </div>
+      <div class="q-counter" aria-live="polite"><span data-ui="q.cleared">클리어</span> <b id="qCount">0</b><span>/ 08</span><span class="q-meter" aria-hidden="true"><i id="qMeter"></i></span></div>
+    </header>
+
+    <div class="q-tools rv">
+      <div class="filters" role="group" aria-label="Filter">
+        <button type="button" class="flt" data-f="all" aria-pressed="true"><span data-ui="q.all">전체</span> <i>8</i></button>
+        <button type="button" class="flt" data-f="en" aria-pressed="false">ENG <i>6</i></button>
+        <button type="button" class="flt" data-f="zh" aria-pressed="false">中文 <i>5</i></button>
+        <button type="button" class="flt" data-f="tri" aria-pressed="false"><span data-ui="q.tri">3개 언어</span> <i>3</i></button>
+      </div>
+      <button type="button" class="expand-all" id="expandAll" aria-pressed="false"><span data-ui="q.expand">전체 펼치기</span></button>
+    </div>
+
+    <div class="qlist" id="qlist">
+
+      <!-- Q1 -->
+      <article class="quest" data-q="0" data-langs="ko en zh" data-ach="tri" style="--c:var(--gold)">
+        <button type="button" class="q-head" aria-expanded="false" aria-controls="qb0">
+          <span class="q-ico hanja" aria-hidden="true">演</span>
+          <span class="q-main">
+            <span class="q-top"><span class="q-no">Q.01</span><span class="q-date">2026.10.15 — 17</span></span>
+            <span class="q-title">2026 PLAVE World Tour <i>Keep It Manic</i> in Singapore</span>
+            <span class="q-role" data-i18n="w0.role">공연 현장 통역 요원 · 네트워크·운영</span>
+            <span class="q-tags"><span class="pair">KO ⇄ EN · 中</span><span class="dom">Live concert · K-POP</span></span>
+          </span>
+          <span class="q-state"><span class="st-new">NEW</span><span class="st-clr">CLEAR</span></span>
+        </button>
+        <div class="q-body" id="qb0">
+          <div class="q-inner">
+            <figure class="q-media holo poster-media">
+              <span class="big-glyph hanja" aria-hidden="true">演</span>
+              <img class="poster" src="../../assets/plave-keep-it-manic.webp" alt="2026 PLAVE World Tour ‘Keep It Manic’ in Singapore 공식 포스터" loading="lazy" width="956" height="1196">
+              <span class="m-tag">Official poster</span>
+              <span class="stamp" aria-hidden="true"><b>QUEST CLEAR</b><small>+250 EXP</small></span>
+            </figure>
+            <div class="q-text">
+              <dl class="q-meta">
+                <div><dt>LOCATION</dt><dd>APEX @ EXPO · Singapore EXPO</dd></div>
+                <div><dt>CLIENT</dt><dd>PLAVE LIVE Production</dd></div>
+                <div><dt>LANG</dt><dd>KO ⇄ EN · 中</dd></div>
+              </dl>
+              <p class="q-desc" data-i18n="w0.desc">한국 제작진과 현지 프로모터·스태프 사이에서 한국어·영어·중국어로 네트워크 및 운영 통역을 담당했습니다. 3일간 한국 엔지니어와 현지 IT·운영 인력의 기술 협의와 현장 운영 소통을 실시간으로 연결했고, 이슈가 빠르게 오가는 공연 환경에서 양측의 의사를 중립적으로 정확히 전달하는 데 집중했습니다.</p>
+              <p class="q-reward"><span class="rw-l" data-ui="q.reward">보상</span><span class="rw-ach" data-achname="tri"></span><span class="rw-xp">+250 EXP</span></p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Q2 -->
+      <article class="quest" data-q="1" data-langs="ko en" data-ach="policy">
+        <button type="button" class="q-head" aria-expanded="false" aria-controls="qb1">
+          <span class="q-ico hanja" aria-hidden="true">仲</span>
+          <span class="q-main">
+            <span class="q-top"><span class="q-no">Q.02</span><span class="q-date">2026.10.01</span></span>
+            <span class="q-title">Press Arbitration Commission <i>at NTU</i></span>
+            <span class="q-role" data-i18n="w8.role">연구 인터뷰 통역 (한-영 순차) · 언론중재위원회 해외 조사</span>
+            <span class="q-tags"><span class="pair">KO ⇄ EN</span><span class="dom">Media policy · Research interview</span></span>
+          </span>
+          <span class="q-state"><span class="st-new">NEW</span><span class="st-clr">CLEAR</span></span>
+        </button>
+        <div class="q-body" id="qb1">
+          <div class="q-inner">
+            <figure class="q-media holo bridge-media">
+              <span class="big-glyph hanja" aria-hidden="true">仲</span>
+              <span class="logo-tile"><img src="../../assets/pac-logo.png" alt="언론중재위원회 Press Arbitration Commission" loading="lazy" width="480" height="339"></span>
+              <span class="link-line" aria-hidden="true"><b>KO ⇄ EN</b></span>
+              <span class="logo-tile"><img src="../../assets/ntu-logo.png" alt="Nanyang Technological University" loading="lazy" width="738" height="264"></span>
+              <span class="stamp" aria-hidden="true"><b>QUEST CLEAR</b><small>+250 EXP</small></span>
+            </figure>
+            <div class="q-text">
+              <dl class="q-meta">
+                <div><dt>LOCATION</dt><dd>Wee Kim Wee School of Comm. &amp; Information · NTU</dd></div>
+                <div><dt>CLIENT</dt><dd>Expert interviews ×2 · NTU</dd></div>
+                <div><dt>LANG</dt><dd>KO ⇄ EN</dd></div>
+              </dl>
+              <p class="q-desc" data-i18n="w8.desc">한국 언론중재위원회의 싱가포르 현지 조사에 동행해, NTU 커뮤니케이션 학부 교수진과의 전문가 인터뷰 두 건을 한-영 순차 통역했습니다. 사전에 위원회 영문 자료와 질문지로 조정·중재·정정보도 등 언론 분쟁 용어를 정리했고, 싱가포르의 언론 피해 구제 방식, 플랫폼 확산에 따른 정정보도의 한계, POFMA, 뉴스 제작에 AI가 쓰이며 생기는 쟁점 같은 정책·학술 논의를 정확히 옮겼습니다.</p>
+              <p class="q-reward"><span class="rw-l" data-ui="q.reward">보상</span><span class="rw-ach" data-achname="policy"></span><span class="rw-xp">+250 EXP</span></p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Q3 -->
+      <article class="quest" data-q="2" data-langs="ko zh" data-ach="zhdesk">
+        <button type="button" class="q-head" aria-expanded="false" aria-controls="qb2">
+          <span class="q-ico hanja" aria-hidden="true">海</span>
+          <span class="q-main">
+            <span class="q-top"><span class="q-no">Q.03</span><span class="q-date">2026.09.02 — 04</span></span>
+            <span class="q-title">Seafood Expo Asia <i>2026</i></span>
+            <span class="q-role" data-i18n="w1.role">전시 통역 요원 (중국어) · 해청정 부스, 한국관</span>
+            <span class="q-tags"><span class="pair">KO ⇄ 中</span><span class="dom">Seafood · F&amp;B</span></span>
+          </span>
+          <span class="q-state"><span class="st-new">NEW</span><span class="st-clr">CLEAR</span></span>
+        </button>
+        <div class="q-body" id="qb2">
+          <div class="q-inner">
+            <figure class="q-media">
+              <img class="ph" src="../../assets/seafood-expo.jpg" alt="Seafood Expo Asia 2026 해청정 부스에서 제품을 소개하는 모습" loading="lazy" width="1100" height="1214" style="object-position:50% 22%">
+              <span class="stamp" aria-hidden="true"><b>QUEST CLEAR</b><small>+250 EXP</small></span>
+            </figure>
+            <div class="q-text">
+              <dl class="q-meta">
+                <div><dt>LOCATION</dt><dd>Sands Expo &amp; Convention Centre · Singapore</dd></div>
+                <div><dt>CLIENT</dt><dd>Hae Cheong Jeong · Korea Pavilion</dd></div>
+                <div><dt>LANG</dt><dd>KO ⇄ 中</dd></div>
+              </dl>
+              <p class="q-desc" data-i18n="w1.desc">전시대행사 하이퍼스를 통해 한국관 참가사 해청정(해초미인) 부스의 중국어 통역을 전담했습니다. 해초·두부·다시마·검은콩 면 등 즉석 저칼로리 건강면 제품군의 특징(글루텐프리·비건 인증, 4無 무첨가, 상온 보관)을 사전에 숙지한 뒤, 3일간 부스를 찾은 중국어권 바이어를 대상으로 제품 소개와 상담을 통역하고 수출상담 일지를 작성했습니다.</p>
+              <p class="q-reward"><span class="rw-l" data-ui="q.reward">보상</span><span class="rw-ach" data-achname="zhdesk"></span><span class="rw-xp">+250 EXP</span></p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Q4 -->
+      <article class="quest" data-q="3" data-langs="ko en zh" data-ach="deal">
+        <button type="button" class="q-head" aria-expanded="false" aria-controls="qb3">
+          <span class="q-ico hanja" aria-hidden="true">酒</span>
+          <span class="q-main">
+            <span class="q-top"><span class="q-no">Q.04</span><span class="q-date">2026.04.21 — 23</span></span>
+            <span class="q-title">FHA — Food &amp; Hospitality Asia <i>2026</i></span>
+            <span class="q-role" data-i18n="w2.role">전시 통역 요원 · 신평양조장</span>
+            <span class="q-tags"><span class="pair">KO ⇄ EN · 中</span><span class="dom">Traditional liquor · F&amp;B</span></span>
+          </span>
+          <span class="q-state"><span class="st-new">NEW</span><span class="st-clr">CLEAR</span></span>
+        </button>
+        <div class="q-body" id="qb3">
+          <div class="q-inner">
+            <figure class="q-media">
+              <img class="ph" src="../../assets/fha.jpg" alt="FHA 2026 신평양조장 부스에서 바이어와 함께한 모습" loading="lazy" width="1200" height="675" style="object-position:34% 50%">
+              <span class="stamp" aria-hidden="true"><b>QUEST CLEAR</b><small>+250 EXP</small></span>
+            </figure>
+            <div class="q-text">
+              <dl class="q-meta">
+                <div><dt>LOCATION</dt><dd>Singapore EXPO</dd></div>
+                <div><dt>CLIENT</dt><dd>Sinpyeong Brewery</dd></div>
+                <div><dt>LANG</dt><dd>KO ⇄ EN · 中</dd></div>
+              </dl>
+              <p class="q-desc" data-i18n="w2.desc">전통주 브랜드의 해외 진출을 지원하는 통역으로 참여, 제품 소개부터 현지 디스트리뷰터와의 실질적인 비즈니스 미팅까지 영어와 중국어로 통역했습니다. 단순 언어 전달을 넘어 중국계 바이어와의 상담에서 신뢰를 쌓는 데 집중했으며, 상담 일지 작성을 보조해 담당자가 미팅 후에도 협상 맥락을 정확히 파악할 수 있도록 했습니다.</p>
+              <p class="q-reward"><span class="rw-l" data-ui="q.reward">보상</span><span class="rw-ach" data-achname="deal"></span><span class="rw-xp">+250 EXP</span></p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Q5 -->
+      <article class="quest" data-q="4" data-langs="ko en zh" data-ach="medtech">
+        <button type="button" class="q-head" aria-expanded="false" aria-controls="qb4">
+          <span class="q-ico hanja" aria-hidden="true">齒</span>
+          <span class="q-main">
+            <span class="q-top"><span class="q-no">Q.05</span><span class="q-date">2026.04.17 — 19</span></span>
+            <span class="q-title">IDEM Singapore <i>2026</i></span>
+            <span class="q-role" data-i18n="w3.role">전시 통역 요원 · innoDtech</span>
+            <span class="q-tags"><span class="pair">KO ⇄ EN · 中</span><span class="dom">Dental AI · Medtech</span></span>
+          </span>
+          <span class="q-state"><span class="st-new">NEW</span><span class="st-clr">CLEAR</span></span>
+        </button>
+        <div class="q-body" id="qb4">
+          <div class="q-inner">
+            <figure class="q-media">
+              <img class="ph" src="../../assets/idem.jpg" alt="IDEM Singapore 2026 innoDtech 부스 상담 통역 모습" loading="lazy" width="1200" height="675" style="object-position:30% 50%">
+              <span class="stamp" aria-hidden="true"><b>QUEST CLEAR</b><small>+250 EXP</small></span>
+            </figure>
+            <div class="q-text">
+              <dl class="q-meta">
+                <div><dt>LOCATION</dt><dd>Marina Bay Sands · Singapore</dd></div>
+                <div><dt>CLIENT</dt><dd>innoDtech · Dr.AlignNavi</dd></div>
+                <div><dt>LANG</dt><dd>KO ⇄ EN · 中</dd></div>
+              </dl>
+              <p class="q-desc" data-i18n="w3.desc">한국 치과 AI 스타트업의 부스 통역을 담당하며, 3일간 부스를 방문한 국내외 바이어와 참관객을 대상으로 한국어-영어 통역을 수행했습니다. 특히 부스를 찾은 중국계 클라이언트 및 협력사와의 상담에서는 중국어로 직접 응대하며 언어 장벽 없는 커뮤니케이션을 이끌었습니다. 사전에 치과의료기기 관련 전문 용어를 숙지해 제품 설명의 정확도를 높였고, 상담 내용을 빠짐없이 기록해 사후 팔로우업이 가능하도록 지원했습니다.</p>
+              <p class="q-reward"><span class="rw-l" data-ui="q.reward">보상</span><span class="rw-ach" data-achname="medtech"></span><span class="rw-xp">+250 EXP</span></p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Q6 -->
+      <article class="quest" data-q="5" data-langs="ko en" data-ach="tech">
+        <button type="button" class="q-head" aria-expanded="false" aria-controls="qb5">
+          <span class="q-ico hanja" aria-hidden="true">金</span>
+          <span class="q-main">
+            <span class="q-top"><span class="q-no">Q.06</span><span class="q-date">2026.05 — 2026.07</span></span>
+            <span class="q-title">LG CNS <i>Singapore</i></span>
+            <span class="q-role" data-i18n="w4.role">Client Engagement Intern · 비즈니스·기술 통역</span>
+            <span class="q-tags"><span class="pair">KO ⇄ EN</span><span class="dom">Banking IT · Cloud</span></span>
+          </span>
+          <span class="q-state"><span class="st-new">NEW</span><span class="st-clr">CLEAR</span></span>
+        </button>
+        <div class="q-body" id="qb5">
+          <div class="q-inner">
+            <figure class="q-media holo">
+              <span class="big-glyph hanja" aria-hidden="true">金</span>
+              <img class="logo" src="../../assets/lgcns.png" alt="LG CNS" loading="lazy" width="320" height="320">
+              <span class="m-tag warn">Client-Confidential</span>
+              <span class="stamp" aria-hidden="true"><b>QUEST CLEAR</b><small>+250 EXP</small></span>
+            </figure>
+            <div class="q-text">
+              <dl class="q-meta">
+                <div><dt>LOCATION</dt><dd>Client-confidential project · APAC</dd></div>
+                <div><dt>CLIENT</dt><dd>Global banking · APAC</dd></div>
+                <div><dt>LANG</dt><dd>KO ⇄ EN</dd></div>
+              </dl>
+              <p class="q-desc" data-i18n="w4.desc">APAC 지역 글로벌 뱅킹 클라이언트를 대상으로 한 IT 및 클라우드 아키텍처 프로젝트에서 통역을 담당했습니다. 기술 미팅 특성상 도메인 지식과 정확한 용어 이해가 필수적인 환경에서, 복잡한 기술 논의를 실시간으로 정확하게 전달하는 역량을 쌓았습니다. 박람회 통역과는 결이 다른, 고난도 비즈니스·기술 통역 경험입니다.</p>
+              <p class="q-reward"><span class="rw-l" data-ui="q.reward">보상</span><span class="rw-ach" data-achname="tech"></span><span class="rw-xp">+250 EXP</span></p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Q7 -->
+      <article class="quest" data-q="6" data-langs="ko zh" data-ach="med">
+        <button type="button" class="q-head" aria-expanded="false" aria-controls="qb6">
+          <span class="q-ico hanja" aria-hidden="true">醫</span>
+          <span class="q-main">
+            <span class="q-top"><span class="q-no">Q.07</span><span class="q-date">2025.04 — 2025.05</span></span>
+            <span class="q-title">IH Clinic <i>Seoul</i></span>
+            <span class="q-role" data-i18n="w5.role">한-중 의료 통역 · 원장 및 의료진 직접 통역</span>
+            <span class="q-tags"><span class="pair">KO ⇄ 中</span><span class="dom">Aesthetic medicine</span></span>
+          </span>
+          <span class="q-state"><span class="st-new">NEW</span><span class="st-clr">CLEAR</span></span>
+        </button>
+        <div class="q-body" id="qb6">
+          <div class="q-inner">
+            <figure class="q-media holo">
+              <span class="big-glyph hanja" aria-hidden="true">醫</span>
+              <img class="logo plain" src="../../assets/ih-clinic.png" alt="IH Clinic" loading="lazy" width="336" height="288">
+              <span class="m-tag">~30 clients / day</span>
+              <span class="stamp" aria-hidden="true"><b>QUEST CLEAR</b><small>+250 EXP</small></span>
+            </figure>
+            <div class="q-text">
+              <dl class="q-meta">
+                <div><dt>LOCATION</dt><dd>Dermatology clinic · Seoul</dd></div>
+                <div><dt>CLIENT</dt><dd>Dermatology · ~30 clients / day</dd></div>
+                <div><dt>LANG</dt><dd>KO ⇄ 中</dd></div>
+              </dl>
+              <p class="q-desc" data-i18n="w5.desc">피부과 전문 클리닉에서 원장 및 의료진과 중국어권 고객 사이의 실시간 한-중 의료 통역을 담당했습니다. 보톡스·필러·스킨부스터 등 주사 시술, 울쎄라·텐쎄라·써마지 등 리프팅·레이저 기기 시술, 영양주사와 미백주사 등 수액 시술 전 과정에서 상담부터 시술 중 안내, 사후 주의사항까지 통역하며 하루 약 30명의 고객을 응대했습니다. 시술 부위, 용량, 부작용처럼 오역이 곧 안전 문제로 이어지는 의료 용어를 정확히 전달하는 데 집중했습니다.</p>
+              <p class="q-reward"><span class="rw-l" data-ui="q.reward">보상</span><span class="rw-ach" data-achname="med"></span><span class="rw-xp">+250 EXP</span></p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Q8 -->
+      <article class="quest" data-q="7" data-langs="ko en" data-ach="field">
+        <button type="button" class="q-head" aria-expanded="false" aria-controls="qb7">
+          <span class="q-ico hanja" aria-hidden="true">軍</span>
+          <span class="q-main">
+            <span class="q-top"><span class="q-no">Q.08</span><span class="q-date">2023.10 — 2025.04</span></span>
+            <span class="q-title" data-i18n="w6.org">대한민국 육군</span>
+            <span class="q-role" data-i18n="w6.role">K1A2 전차 포수 · 통역병 · 분대장</span>
+            <span class="q-tags"><span class="pair">KO ⇄ EN</span><span class="dom">Joint operations · Defense</span></span>
+          </span>
+          <span class="q-state"><span class="st-new">NEW</span><span class="st-clr">CLEAR</span></span>
+        </button>
+        <div class="q-body" id="qb7">
+          <div class="q-inner">
+            <figure class="q-media">
+              <img class="ph" src="../../assets/rok-us.jpg" alt="한미연합훈련 작전 브리핑 통역 모습" loading="lazy" width="540" height="360" style="object-position:100% 50%">
+              <span class="stamp" aria-hidden="true"><b>QUEST CLEAR</b><small>+250 EXP</small></span>
+            </figure>
+            <div class="q-text">
+              <dl class="q-meta">
+                <div><dt>LOCATION</dt><dd>Capital Mechanized Infantry Division · ROK</dd></div>
+                <div><dt>CLIENT</dt><dd>ROK–US Combined Exercise</dd></div>
+                <div><dt>LANG</dt><dd>KO ⇄ EN</dd></div>
+              </dl>
+              <p class="q-role2" data-i18n="w6.role2">한미 연합작전 통역 · 1년 7개월</p>
+              <p class="q-desc" data-i18n="w6.desc">복무 기간 전반에 걸쳐 한미 연합훈련 시 미군 측과의 작전 브리핑·현장 커뮤니케이션 통역을 수행하며, 압박감 높은 실전 환경에서 오역이 허용되지 않는 통역 역량을 길렀습니다. 동시에 15명 규모 분대를 이끄는 분대장으로서 팀을 관리했고, 만기 전역으로 복무를 마쳤습니다. 통역 실무와 리더십을 동시에 증명하는 이력입니다.</p>
+              <p class="q-reward"><span class="rw-l" data-ui="q.reward">보상</span><span class="rw-ach" data-achname="field"></span><span class="rw-xp">+250 EXP</span></p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- side log (background) -->
+    <div class="side rv">
+      <p class="kicker"><span class="kb">[ + ]</span> SIDE LOG <span class="sl">//</span> <span data-i18n="bg.title">배움, 그리고 그&nbsp;너머.</span></p>
+      <ul class="side-list">
+        <li><span class="sd">2022.08 — 2028.12 <em data-i18n="bg.exp">(예정)</em></span><b>Singapore Management University</b><span data-i18n="bg.smu">Business — Finance &amp; International Trade 세부 전공</span><i>EDU</i></li>
+        <li><span class="sd">2018.06 — 2022.05</span><b>Suzhou Singapore International School</b><span data-i18n="bg.ssis">중국 쑤저우 소재 — 트라이링구얼 역량의 기반이 된 학창 시절</span><i>EDU</i></li>
+        <li><span class="sd">2025.05 — 07 · Seoul</span><b>The Shilla Hotels &amp; Resorts</b><span data-i18n="bg.shilla">화장품 영업 인턴 — 중국어·영어 역량으로 해외 고객 응대 및 매출 기여</span><i>CLIENT</i></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACHIEVEMENTS ============ -->
+<section class="sec achs" id="achievements" data-sec="achievements">
+  <div class="wrap">
+    <header class="sec-head rv">
+      <div>
+        <p class="kicker"><span class="kb">[ 03 ]</span> ACHIEVEMENTS</p>
+        <h2 class="title" data-ui="ach.title">업적</h2>
+      </div>
+      <div class="q-counter"><span data-ui="ach.unlockedN">해금</span> <b id="achCount">0</b><span>/ 12</span></div>
+    </header>
+    <ul class="ach-grid" id="achGrid"></ul>
+    <p class="ach-note rv" data-ui="ach.note">퀘스트를 열어 클리어하면 업적이 해금됩니다.</p>
+  </div>
+</section>
+
+<!-- ============ SKILLS (services) ============ -->
+<section class="sec skills" id="skills" data-sec="skills">
+  <div class="wrap">
+    <header class="sec-head rv">
+      <div>
+        <p class="kicker"><span class="kb">[ 04 ]</span> SKILL TREE <span class="sl">//</span> <span data-ui="skills.kicker">서비스</span></p>
+        <h2 class="title" data-i18n="svc.title">이런 통역이 가능합니다.</h2>
+      </div>
+    </header>
+    <ol class="skill-grid">
+      <li class="skill rv"><span class="sk-no">01</span><h3 data-i18n="svc.1t">부스 방문객 응대</h3><p data-i18n="svc.1d">한·영·중 3개 언어로 참관객 응대 및 제품 설명</p></li>
+      <li class="skill rv"><span class="sk-no">02</span><h3 data-i18n="svc.2t">바이어 미팅 통역</h3><p data-i18n="svc.2d">디스트리뷰터·투자자 대상 비즈니스 미팅 순차 통역</p></li>
+      <li class="skill rv"><span class="sk-no">03</span><h3 data-i18n="svc.3t">수출상담 일지 작성</h3><p data-i18n="svc.3d">상담 내용 기록 및 사후 팔로우업 지원 — Seafood Expo·IDEM·FHA 현장 실무 경험</p></li>
+      <li class="skill rv"><span class="sk-no">04</span><h3 data-i18n="svc.4t">사전 제품 교육 숙지</h3><p data-i18n="svc.4d">의료기기·F&amp;B·IT 등 도메인별 전문 용어 사전 학습</p></li>
+      <li class="skill rv"><span class="sk-no">05</span><h3 data-i18n="svc.5t">의료 통역</h3><p data-i18n="svc.5d">상담·시술·사후 관리까지 한-중 의료 통역 — IH Clinic 실무 경험</p></li>
+      <li class="skill rv"><span class="sk-no">06</span><h3 data-i18n="svc.6t">비즈니스·기술 통역</h3><p data-i18n="svc.6d">IT·클라우드·금융 등 전문 분야 미팅 통역 — LG CNS 실무 경험</p></li>
+      <li class="skill rv"><span class="sk-no">07</span><h3 data-i18n="svc.7t">공연·대형 행사 운영 통역</h3><p data-i18n="svc.7d">제작진과 현지 스태프 간 네트워크·운영 소통 통역 — PLAVE 콘서트 실무 경험</p></li>
+      <li class="skill rv"><span class="sk-no">08</span><h3 data-i18n="svc.8t">학술·정책 인터뷰 통역</h3><p data-i18n="svc.8d">교수·연구진 대상 전문가 인터뷰 한-영 순차 통역 — 언론중재위원회 NTU 인터뷰 실무 경험</p></li>
+    </ol>
+    <p class="avail rv"><span class="dot" aria-hidden="true"></span><span class="av-l">AVAILABLE</span><span data-i18n="svc.avail">싱가포르 거주 · 현지 출퇴근 가능 · SECC / MBS / Singapore EXPO 전 지역</span></p>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="sec contact" id="contact" data-sec="contact">
+  <div class="wrap">
+    <div class="invite panel rv">
+      <p class="kicker"><span class="kb">[ 05 ]</span> PARTY INVITE <span class="sl">//</span> <span data-ui="contact.kicker">연락처</span></p>
+      <h2 class="title" data-i18n="contact.title">함께 일해요.</h2>
+      <p class="c-text" data-i18n="contact.text">박람회·행사 통역 문의는 아래 연락처로 편하게 남겨주세요. 싱가포르 현지에서 바로 투입 가능하며, 빠르게 회신드리겠습니다.</p>
+
+      <a class="big-mail" href="mailto:hongjinhyotop@gmail.com"><span class="bm-k">A</span><span class="bm-t">hongjinhyotop<wbr>@gmail.com</span><span class="arr" aria-hidden="true">↗</span></a>
+
+      <div class="c-rows">
+        <div class="c-row">
+          <span class="c-l">Email</span>
+          <a class="c-val" href="mailto:hongjinhyotop@gmail.com">hongjinhyotop@gmail.com</a>
+          <button type="button" class="copy" data-copy="hongjinhyotop@gmail.com" data-i18n="ui.copy">복사</button>
+        </div>
+        <div class="c-row">
+          <span class="c-l">Call</span>
+          <a class="c-val" href="tel:+6588245713">+65 8824 5713</a>
+          <button type="button" class="copy" data-copy="+6588245713" data-i18n="ui.copy">복사</button>
+        </div>
+        <div class="c-row">
+          <span class="c-l">KakaoTalk ID</span>
+          <span class="c-val">HONGJINHYO2003</span>
+          <button type="button" class="copy" data-copy="HONGJINHYO2003" data-i18n="ui.copy">복사</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span>HONG JINHYO — INTERPRETER · KOR / ENG / 中 — SINGAPORE</span>
+    <span class="egg-hint" aria-hidden="true">↑ ↑ ↓ ↓ ← → ← → B A</span>
+    <a href="#select">↑ TOP</a>
+  </div>
+</footer>
+
+<!-- mobile dock -->
+<nav class="dock" aria-label="Sections (mobile)">
+  <a href="#select" data-nav="select"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 4.5-6.5 8-6.5s6.5 2 8 6.5"/></svg><span data-ui="nav.select">캐릭터</span></a>
+  <a href="#quests" data-nav="quests"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h10l3 3v15H6z"/><path d="M9 9h7M9 13h7M9 17h4"/></svg><span data-ui="nav.quests">퀘스트</span></a>
+  <a href="#achievements" data-nav="achievements"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v4M8 21h8"/></svg><span data-ui="nav.ach">업적</span></a>
+  <a href="#skills" data-nav="skills"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"/></svg><span data-ui="nav.skills">스킬</span></a>
+  <a href="#contact" data-nav="contact" class="dock-cta"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 6l9 7 9-7"/></svg><span data-ui="nav.contact">연락</span></a>
+</nav>
+
+<div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<div class="egg" id="egg" aria-hidden="true">
+  <canvas id="eggRain"></canvas>
+  <div class="egg-banner">
+    <p class="egg-k">↑ ↑ ↓ ↓ ← → ← → B A</p>
+    <p class="egg-t"><span class="hanja">通譯</span> MODE</p>
+    <p class="egg-s" data-ui="egg.title">치트 코드 승인 — 경험치 MAX</p>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script src="mission.js" defer></script>
+</body>
+</html>
