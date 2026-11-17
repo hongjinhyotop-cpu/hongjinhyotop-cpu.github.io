@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>홍진효 Hong Jinhyo — Trilingual Interpreter · BABEL</title>
+<meta name="description" content="한국어·영어·중국어 트라이링구얼 통역사 홍진효. Trilingual Korean–English–Chinese interpreter based in Singapore.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07080d">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+KR:wght@600;900&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet">
+<script>
+/* Decide the motion tier before first paint: "full" (WebGL) or "lite". */
+(function(){
+  var d = document.documentElement, q = new URLSearchParams(location.search), nav = navigator, lite = false, why = 'capable';
+  d.classList.add('js');
+  if (q.has('lite')) { lite = true; why = 'param'; }
+  else if (matchMedia('(prefers-reduced-motion: reduce)').matches) { lite = true; why = 'reduced-motion'; }
+  else if (nav.connection && nav.connection.saveData) { lite = true; why = 'save-data'; }
+  else if ((nav.deviceMemory && nav.deviceMemory < 3) || (nav.hardwareConcurrency && nav.hardwareConcurrency < 4)) { lite = true; why = 'low-end'; }
+  else {
+    try {
+      var c = document.createElement('canvas'), gl = c.getContext('webgl2') || c.getContext('webgl');
+      if (!gl) { lite = true; why = 'no-webgl'; }
+      else { var x = gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext(); }
+    } catch (e) { lite = true; why = 'no-webgl'; }
+  }
+  if (q.has('full')) { lite = false; why = 'param'; }
+  d.classList.add(lite ? 'lite' : 'full');
+  d.setAttribute('data-mode', why);
+})();
+</script>
+<link rel="stylesheet" href="babel.css">
+</head>
+<body>
+
+<canvas id="stage" aria-hidden="true"></canvas>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="cursor" aria-hidden="true"><i></i></div>
+
+<a class="skip" href="#work">Skip to experience</a>
+
+<nav class="topbar" aria-label="Site">
+  <a class="brand" href="#top" aria-label="Hong Jinhyo — top">
+    <svg class="mark" viewBox="0 0 28 32" aria-hidden="true"><path d="M4 30h20M6 30v-5h16v5M8 25v-5h12v5M10 20v-5h8v5M12 15v-5h4v5M14 10V3"/></svg>
+    <span class="mono brand-name">Hong Jinhyo</span>
+  </a>
+  <p class="floor-chip mono" aria-live="polite"><span id="chipNo">G</span><b id="chipHan" class="hanja">通</b><span id="chipTxt">Ground</span></p>
+  <div class="tb-right">
+    <div class="langs" role="group" aria-label="Language" data-active="ko" data-magnetic=".12">
+      <span class="ind" aria-hidden="true"></span>
+      <button type="button" data-lang="ko" aria-pressed="true" lang="ko">KOR</button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en">ENG</button>
+      <button type="button" data-lang="zh" aria-pressed="false" lang="zh-Hans">中文</button>
+    </div>
+    <a class="tb-cta mono" href="#contact" data-magnetic=".4"><span class="tb-cta-t">Contact</span><span aria-hidden="true">↗</span></a>
+  </div>
+  <div class="tb-progress" id="prog"></div>
+</nav>
+
+<nav class="rail" aria-label="Floors">
+  <ol>
+    <li><a href="#f1" data-zone="f1" aria-label="01 — Live concert · K-POP"><span class="mono">01</span><b class="hanja">演</b></a></li>
+    <li><a href="#f2" data-zone="f2" aria-label="02 — Media policy · Research interview"><span class="mono">02</span><b class="hanja">仲</b></a></li>
+    <li><a href="#f3" data-zone="f3" aria-label="03 — Seafood · F&amp;B"><span class="mono">03</span><b class="hanja">海</b></a></li>
+    <li><a href="#f4" data-zone="f4" aria-label="04 — Traditional liquor · F&amp;B"><span class="mono">04</span><b class="hanja">酒</b></a></li>
+    <li><a href="#f5" data-zone="f5" aria-label="05 — Dental AI · Medtech"><span class="mono">05</span><b class="hanja">齒</b></a></li>
+    <li><a href="#f6" data-zone="f6" aria-label="06 — Banking IT · Cloud"><span class="mono">06</span><b class="hanja">金</b></a></li>
+    <li><a href="#f7" data-zone="f7" aria-label="07 — Aesthetic medicine"><span class="mono">07</span><b class="hanja">醫</b></a></li>
+    <li><a href="#f8" data-zone="f8" aria-label="08 — Joint operations · Defense"><span class="mono">08</span><b class="hanja">軍</b></a></li>
+    <li><a href="#contact" data-zone="contact" aria-label="Contact"><span class="mono">TOP</span><b class="hanja">通</b></a></li>
+  </ol>
+</nav>
+
+<header class="hero" id="top">
+  <p class="mono hero-kicker rv-h"><span class="dot"></span>Trilingual Interpreter — KOR / ENG / 中 — Singapore</p>
+  <p class="sr">말은 달라도, 뜻은 하나로. — Different words. One meaning. — 言语不同，心意相通。</p>
+
+  <div class="hero-stage" aria-hidden="true">
+    <span class="hero-word" id="heroWord">말</span>
+    <ol class="hero-langs" id="heroLangs">
+      <li data-l="ko" class="on"><span class="mono">KOR</span><b lang="ko">말</b></li>
+      <li data-l="en"><span class="mono">ENG</span><b lang="en">Words</b></li>
+      <li data-l="zh"><span class="mono">中</span><b lang="zh-Hans">话</b></li>
+    </ol>
+  </div>
+
+  <div class="hero-foot">
+    <h1 class="hero-name rv-h"><span class="hn-ko">홍진효</span><span class="hn-en">Hong Jinhyo — <i>Jin</i></span></h1>
+    <div class="hero-side rv-h">
+      <p class="hero-statement" id="heroStatement" aria-hidden="true"><span>말은 달라도,</span> <span>뜻은 하나로.</span></p>
+      <p class="hero-lede" data-i18n="hero.lede">세 개의 언어로, 현장의 대화를 매끄럽게 연결합니다.</p>
+    </div>
+    <a class="scroll-cue mono" href="#work" data-magnetic=".3"><i></i>Scroll — climb</a>
+  </div>
+</header>
+
+<main>
+
+<section class="directory" id="work" aria-labelledby="workTitle">
+  <div class="dir-panel">
+    <p class="kicker mono"><b>經歷</b> Experience — 08 floors</p>
+    <h2 class="title skew" id="workTitle" data-i18n="work.title">현장이 증명합니다.</h2>
+    <ol class="dir-list">
+      <li><a class="dir-row" href="#f1" data-zone="f1"><span class="d-no mono">01</span><b class="d-han hanja" aria-hidden="true">演</b><span class="d-org">2026 PLAVE World Tour <i>Keep It Manic</i> in Singapore</span><span class="d-dom mono">Live concert · K-POP</span><span class="d-date mono">2026.10.15 — 17</span><span class="d-go" aria-hidden="true">↗</span></a></li>
+      <li><a class="dir-row" href="#f2" data-zone="f2"><span class="d-no mono">02</span><b class="d-han hanja" aria-hidden="true">仲</b><span class="d-org">Press Arbitration Commission <i>at NTU</i></span><span class="d-dom mono">Media policy · Research interview</span><span class="d-date mono">2026.10.01</span><span class="d-go" aria-hidden="true">↗</span></a></li>
+      <li><a class="dir-row" href="#f3" data-zone="f3"><span class="d-no mono">03</span><b class="d-han hanja" aria-hidden="true">海</b><span class="d-org">Seafood Expo Asia <i>2026</i></span><span class="d-dom mono">Seafood · F&amp;B</span><span class="d-date mono">2026.09.02 — 04</span><span class="d-go" aria-hidden="true">↗</span></a></li>
+      <li><a class="dir-row" href="#f4" data-zone="f4"><span class="d-no mono">04</span><b class="d-han hanja" aria-hidden="true">酒</b><span class="d-org">FHA — Food &amp; Hospitality Asia <i>2026</i></span><span class="d-dom mono">Traditional liquor · F&amp;B</span><span class="d-date mono">2026.04.21 — 23</span><span class="d-go" aria-hidden="true">↗</span></a></li>
+      <li><a class="dir-row" href="#f5" data-zone="f5"><span class="d-no mono">05</span><b class="d-han hanja" aria-hidden="true">齒</b><span class="d-org">IDEM Singapore <i>2026</i></span><span class="d-dom mono">Dental AI · Medtech</span><span class="d-date mono">2026.04.17 — 19</span><span class="d-go" aria-hidden="true">↗</span></a></li>
+      <li><a class="dir-row" href="#f6" data-zone="f6"><span class="d-no mono">06</span><b class="d-han hanja" aria-hidden="true">金</b><span class="d-org">LG CNS <i>Singapore</i></span><span class="d-dom mono">Banking IT · Cloud</span><span class="d-date mono">2026.05 — 2026.07</span><span class="d-go" aria-hidden="true">↗</span></a></li>
+      <li><a class="dir-row" href="#f7" data-zone="f7"><span class="d-no mono">07</span><b class="d-han hanja" aria-hidden="true">醫</b><span class="d-org">IH Clinic <i>Seoul</i></span><span class="d-dom mono">Aesthetic medicine</span><span class="d-date mono">2025.04 — 2025.05</span><span class="d-go" aria-hidden="true">↗</span></a></li>
+      <li><a class="dir-row" href="#f8" data-zone="f8"><span class="d-no mono">08</span><b class="d-han hanja" aria-hidden="true">軍</b><span class="d-org" data-i18n="w6.org">대한민국 육군</span><span class="d-dom mono">Joint operations · Defense</span><span class="d-date mono">2023.10 — 2025.04</span><span class="d-go" aria-hidden="true">↗</span></a></li>
+    </ol>
+  </div>
+</section>
+
+<section class="tower" id="tower" aria-label="Experience">
+  <article class="floor" id="f1" data-glyph="演" data-side="l" aria-labelledby="f1t">
+    <span class="f-glyph hanja" aria-hidden="true">演</span>
+    <div class="card">
+      <div class="f-head mono"><span class="f-no">01 / 08</span><span class="f-dom"><b class="hanja" aria-hidden="true">演</b>Live concert · K-POP</span><span class="f-date">2026.10.15 — 17</span></div>
+      <figure class="media glyph-panel poster-panel">
+        <img class="poster rp" src="../../assets/plave-keep-it-manic.webp" alt="2026 PLAVE World Tour ‘Keep It Manic’ in Singapore 공식 포스터" loading="lazy" width="956" height="1196">
+        <span class="poster-tag mono">Official poster</span>
+        <figcaption class="l3"><b>KO ⇄ EN · 中</b><span>PLAVE LIVE Production</span></figcaption>
+      </figure>
+      <h3 class="f-org skew" id="f1t">2026 PLAVE World Tour <i>Keep It Manic</i> in Singapore</h3>
+      <p class="f-place mono">APEX @ EXPO · Singapore EXPO</p>
+      <p class="f-role" data-i18n="w0.role">공연 현장 통역 요원 · 네트워크·운영</p>
+      <p class="f-desc" data-i18n="w0.desc">한국 제작진과 현지 프로모터·스태프 사이에서 한국어·영어·중국어로 네트워크 및 운영 통역을 담당했습니다. 3일간 한국 엔지니어와 현지 IT·운영 인력의 기술 협의와 현장 운영 소통을 실시간으로 연결했고, 이슈가 빠르게 오가는 공연 환경에서 양측의 의사를 중립적으로 정확히 전달하는 데 집중했습니다.</p>
+    </div>
+  </article>
+
+  <article class="floor" id="f2" data-glyph="仲" data-side="r" aria-labelledby="f2t">
+    <span class="f-glyph hanja" aria-hidden="true">仲</span>
+    <div class="card">
+      <div class="f-head mono"><span class="f-no">02 / 08</span><span class="f-dom"><b class="hanja" aria-hidden="true">仲</b>Media policy · Research interview</span><span class="f-date">2026.10.01</span></div>
+      <figure class="media glyph-panel bridge-panel">
+        <svg class="bridge" viewBox="0 0 400 300" aria-hidden="true"><path d="M40 170 Q200 -6 360 170 L326 170 Q200 44 74 170 Z"/></svg>
+        <span class="bridge-label mono" aria-hidden="true">KO ⇄ EN</span>
+        <span class="logo-tile lt-left"><img src="../../assets/pac-logo.png" alt="언론중재위원회 Press Arbitration Commission" loading="lazy" width="480" height="339"></span>
+        <span class="logo-tile lt-right"><img src="../../assets/ntu-logo.png" alt="Nanyang Technological University" loading="lazy" width="738" height="264"></span>
+        <figcaption class="l3"><b>KO ⇄ EN</b><span>Expert interviews ×2 · NTU</span></figcaption>
+      </figure>
+      <h3 class="f-org skew" id="f2t">Press Arbitration Commission <i>at NTU</i></h3>
+      <p class="f-place mono">Wee Kim Wee School of Comm. &amp; Information · NTU</p>
+      <p class="f-role" data-i18n="w8.role">연구 인터뷰 통역 (한-영 순차) · 언론중재위원회 해외 조사</p>
+      <p class="f-desc" data-i18n="w8.desc">한국 언론중재위원회의 싱가포르 현지 조사에 동행해, NTU 커뮤니케이션 학부 교수진과의 전문가 인터뷰 두 건을 한-영 순차 통역했습니다. 사전에 위원회 영문 자료와 질문지로 조정·중재·정정보도 등 언론 분쟁 용어를 정리했고, 싱가포르의 언론 피해 구제 방식, 플랫폼 확산에 따른 정정보도의 한계, POFMA, 뉴스 제작에 AI가 쓰이며 생기는 쟁점 같은 정책·학술 논의를 정확히 옮겼습니다.</p>
+    </div>
+  </article>
+
+  <article class="floor" id="f3" data-glyph="海" data-side="l" aria-labelledby="f3t">
+    <span class="f-glyph hanja" aria-hidden="true">海</span>
+    <div class="card">
+      <div class="f-head mono"><span class="f-no">03 / 08</span><span class="f-dom"><b class="hanja" aria-hidden="true">海</b>Seafood · F&amp;B</span><span class="f-date">2026.09.02 — 04</span></div>
+      <figure class="media">
+        <img class="ph rp" src="../../assets/seafood-expo.jpg" alt="Seafood Expo Asia 2026 해청정 부스에서 제품을 소개하는 모습" loading="lazy" width="1100" height="1214" style="object-position:50% 22%">
+        <figcaption class="l3"><b>KO ⇄ 中</b><span>Hae Cheong Jeong · Korea Pavilion</span></figcaption>
+      </figure>
+      <h3 class="f-org skew" id="f3t">Seafood Expo Asia <i>2026</i></h3>
+      <p class="f-place mono">Sands Expo &amp; Convention Centre · Singapore</p>
+      <p class="f-role" data-i18n="w1.role">전시 통역 요원 (중국어) · 해청정 부스, 한국관</p>
+      <p class="f-desc" data-i18n="w1.desc">전시대행사 하이퍼스를 통해 한국관 참가사 해청정(해초미인) 부스의 중국어 통역을 전담했습니다. 해초·두부·다시마·검은콩 면 등 즉석 저칼로리 건강면 제품군의 특징(글루텐프리·비건 인증, 4無 무첨가, 상온 보관)을 사전에 숙지한 뒤, 3일간 부스를 찾은 중국어권 바이어를 대상으로 제품 소개와 상담을 통역하고 수출상담 일지를 작성했습니다.</p>
+    </div>
+  </article>
+
+  <article class="floor" id="f4" data-glyph="酒" data-side="r" aria-labelledby="f4t">
+    <span class="f-glyph hanja" aria-hidden="true">酒</span>
+    <div class="card">
+      <div class="f-head mono"><span class="f-no">04 / 08</span><span class="f-dom"><b class="hanja" aria-hidden="true">酒</b>Traditional liquor · F&amp;B</span><span class="f-date">2026.04.21 — 23</span></div>
+      <figure class="media">
+        <img class="ph rp" src="../../assets/fha.jpg" alt="FHA 2026 신평양조장 부스에서 바이어와 함께한 모습" loading="lazy" width="1200" height="675" style="object-position:34% 50%">
+        <figcaption class="l3"><b>KO ⇄ EN · 中</b><span>Sinpyeong Brewery</span></figcaption>
+      </figure>
+      <h3 class="f-org skew" id="f4t">FHA — Food &amp; Hospitality Asia <i>2026</i></h3>
+      <p class="f-place mono">Singapore EXPO</p>
+      <p class="f-role" data-i18n="w2.role">전시 통역 요원 · 신평양조장</p>
+      <p class="f-desc" data-i18n="w2.desc">전통주 브랜드의 해외 진출을 지원하는 통역으로 참여, 제품 소개부터 현지 디스트리뷰터와의 실질적인 비즈니스 미팅까지 영어와 중국어로 통역했습니다. 단순 언어 전달을 넘어 중국계 바이어와의 상담에서 신뢰를 쌓는 데 집중했으며, 상담 일지 작성을 보조해 담당자가 미팅 후에도 협상 맥락을 정확히 파악할 수 있도록 했습니다.</p>
+    </div>
+  </article>
+
+  <article class="floor" id="f5" data-glyph="齒" data-side="l" aria-labelledby="f5t">
+    <span class="f-glyph hanja" aria-hidden="true">齒</span>
+    <div class="card">
+      <div class="f-head mono"><span class="f-no">05 / 08</span><span class="f-dom"><b class="hanja" aria-hidden="true">齒</b>Dental AI · Medtech</span><span class="f-date">2026.04.17 — 19</span></div>
+      <figure class="media">
+        <img class="ph rp" src="../../assets/idem.jpg" alt="IDEM Singapore 2026 innoDtech 부스 상담 통역 모습" loading="lazy" width="1200" height="675" style="object-position:30% 50%">
+        <figcaption class="l3"><b>KO ⇄ EN · 中</b><span>innoDtech · Dr.AlignNavi</span></figcaption>
+      </figure>
+      <h3 class="f-org skew" id="f5t">IDEM Singapore <i>2026</i></h3>
+      <p class="f-place mono">Marina Bay Sands · Singapore</p>
+      <p class="f-role" data-i18n="w3.role">전시 통역 요원 · innoDtech</p>
+      <p class="f-desc" data-i18n="w3.desc">한국 치과 AI 스타트업의 부스 통역을 담당하며, 3일간 부스를 방문한 국내외 바이어와 참관객을 대상으로 한국어-영어 통역을 수행했습니다. 특히 부스를 찾은 중국계 클라이언트 및 협력사와의 상담에서는 중국어로 직접 응대하며 언어 장벽 없는 커뮤니케이션을 이끌었습니다. 사전에 치과의료기기 관련 전문 용어를 숙지해 제품 설명의 정확도를 높였고, 상담 내용을 빠짐없이 기록해 사후 팔로우업이 가능하도록 지원했습니다.</p>
+    </div>
+  </article>
+
+  <article class="floor" id="f6" data-glyph="金" data-side="r" aria-labelledby="f6t">
+    <span class="f-glyph hanja" aria-hidden="true">金</span>
+    <div class="card">
+      <div class="f-head mono"><span class="f-no">06 / 08</span><span class="f-dom"><b class="hanja" aria-hidden="true">金</b>Banking IT · Cloud</span><span class="f-date">2026.05 — 2026.07</span></div>
+      <figure class="media glyph-panel">
+        <img class="logo" src="../../assets/lgcns.png" alt="LG CNS" loading="lazy" width="320" height="320">
+        <span class="classified mono">Client-Confidential</span>
+        <figcaption class="l3"><b>KO ⇄ EN</b><span>Global banking · APAC</span></figcaption>
+      </figure>
+      <h3 class="f-org skew" id="f6t">LG CNS <i>Singapore</i></h3>
+      <p class="f-place mono">Client-confidential project · APAC</p>
+      <p class="f-role" data-i18n="w4.role">Client Engagement Intern · 비즈니스·기술 통역</p>
+      <p class="f-desc" data-i18n="w4.desc">APAC 지역 글로벌 뱅킹 클라이언트를 대상으로 한 IT 및 클라우드 아키텍처 프로젝트에서 통역을 담당했습니다. 기술 미팅 특성상 도메인 지식과 정확한 용어 이해가 필수적인 환경에서, 복잡한 기술 논의를 실시간으로 정확하게 전달하는 역량을 쌓았습니다. 박람회 통역과는 결이 다른, 고난도 비즈니스·기술 통역 경험입니다.</p>
+    </div>
+  </article>
+
+  <article class="floor" id="f7" data-glyph="醫" data-side="l" aria-labelledby="f7t">
+    <span class="f-glyph hanja" aria-hidden="true">醫</span>
+    <div class="card">
+      <div class="f-head mono"><span class="f-no">07 / 08</span><span class="f-dom"><b class="hanja" aria-hidden="true">醫</b>Aesthetic medicine</span><span class="f-date">2025.04 — 2025.05</span></div>
+      <figure class="media glyph-panel">
+        <img class="logo plain" src="../../assets/ih-clinic.png" alt="IH Clinic" loading="lazy" width="336" height="288">
+        <figcaption class="l3"><b>KO ⇄ 中</b><span>Dermatology · ~30 clients / day</span></figcaption>
+      </figure>
+      <h3 class="f-org skew" id="f7t">IH Clinic <i>Seoul</i></h3>
+      <p class="f-place mono">Dermatology clinic · Seoul</p>
+      <p class="f-role" data-i18n="w5.role">한-중 의료 통역 · 원장 및 의료진 직접 통역</p>
+      <p class="f-desc" data-i18n="w5.desc">피부과 전문 클리닉에서 원장 및 의료진과 중국어권 고객 사이의 실시간 한-중 의료 통역을 담당했습니다. 보톡스·필러·스킨부스터 등 주사 시술, 울쎄라·텐쎄라·써마지 등 리프팅·레이저 기기 시술, 영양주사와 미백주사 등 수액 시술 전 과정에서 상담부터 시술 중 안내, 사후 주의사항까지 통역하며 하루 약 30명의 고객을 응대했습니다. 시술 부위, 용량, 부작용처럼 오역이 곧 안전 문제로 이어지는 의료 용어를 정확히 전달하는 데 집중했습니다.</p>
+    </div>
+  </article>
+
+  <article class="floor" id="f8" data-glyph="軍" data-side="r" aria-labelledby="f8t">
+    <span class="f-glyph hanja" aria-hidden="true">軍</span>
+    <div class="card">
+      <div class="f-head mono"><span class="f-no">08 / 08</span><span class="f-dom"><b class="hanja" aria-hidden="true">軍</b>Joint operations · Defense</span><span class="f-date">2023.10 — 2025.04</span></div>
+      <figure class="media">
+        <img class="ph rp" src="../../assets/rok-us.jpg" alt="한미연합훈련 작전 브리핑 통역 모습" loading="lazy" width="540" height="360" style="object-position:100% 50%">
+        <figcaption class="l3"><b>KO ⇄ EN</b><span>ROK–US Combined Exercise</span></figcaption>
+      </figure>
+      <h3 class="f-org skew" id="f8t" data-i18n="w6.org">대한민국 육군</h3>
+      <p class="f-place mono">Capital Mechanized Infantry Division · ROK</p>
+      <p class="f-role" data-i18n="w6.role">K1A2 전차 포수 · 통역병 · 분대장</p>
+      <p class="f-role" data-i18n="w6.role2">한미 연합작전 통역 · 1년 7개월</p>
+      <p class="f-desc" data-i18n="w6.desc">복무 기간 전반에 걸쳐 한미 연합훈련 시 미군 측과의 작전 브리핑·현장 커뮤니케이션 통역을 수행하며, 압박감 높은 실전 환경에서 오역이 허용되지 않는 통역 역량을 길렀습니다. 동시에 15명 규모 분대를 이끄는 분대장으로서 팀을 관리했고, 만기 전역으로 복무를 마쳤습니다. 통역 실무와 리더십을 동시에 증명하는 이력입니다.</p>
+    </div>
+  </article>
+</section>
+
+<section class="contact" id="contact" data-glyph="通" data-side="l" aria-labelledby="contactTitle">
+  <span class="f-glyph hanja" aria-hidden="true">通</span>
+  <div class="card c-card">
+    <div class="c-top">
+      <figure class="c-portrait media"><img class="rp" src="../../assets/portrait.jpg" alt="홍진효 프로필 사진 / Portrait of Hong Jinhyo" width="600" height="600" loading="lazy"></figure>
+      <div>
+        <p class="kicker mono"><b>連絡</b> Contact — Summit</p>
+        <h2 class="title skew" id="contactTitle" data-i18n="contact.title">함께 일해요.</h2>
+      </div>
+    </div>
+    <p class="c-text" data-i18n="contact.text">박람회·행사 통역 문의는 아래 연락처로 편하게 남겨주세요. 싱가포르 현지에서 바로 투입 가능하며, 빠르게 회신드리겠습니다.</p>
+
+    <a class="big-mail" href="mailto:hongjinhyotop@gmail.com" data-magnetic=".18">hongjinhyotop<wbr>@gmail.com<span class="arr" aria-hidden="true">↗</span></a>
+
+    <div class="c-rows">
+      <div class="c-row">
+        <span class="mono">Email</span>
+        <a class="c-val" href="mailto:hongjinhyotop@gmail.com">hongjinhyotop@gmail.com</a>
+        <button type="button" class="copy mono" data-copy="hongjinhyotop@gmail.com" data-i18n="ui.copy" data-magnetic=".3">복사</button>
+      </div>
+      <div class="c-row">
+        <span class="mono">Call</span>
+        <a class="c-val" href="tel:+6588245713">+65 8824 5713</a>
+        <button type="button" class="copy mono" data-copy="+6588245713" data-i18n="ui.copy" data-magnetic=".3">복사</button>
+      </div>
+      <div class="c-row">
+        <span class="mono">KakaoTalk ID</span>
+        <span class="c-val">HONGJINHYO2003</span>
+        <button type="button" class="copy mono" data-copy="HONGJINHYO2003" data-i18n="ui.copy" data-magnetic=".3">복사</button>
+      </div>
+    </div>
+
+    <p class="avail"><span class="mono"><i></i>Available</span><span data-i18n="svc.avail">싱가포르 거주 · 현지 출퇴근 가능 · SECC / MBS / Singapore EXPO 전 지역</span></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot mono">
+    <a class="brand" href="#top"><svg class="mark" viewBox="0 0 28 32" aria-hidden="true"><path d="M4 30h20M6 30v-5h16v5M8 25v-5h12v5M10 20v-5h8v5M12 15v-5h4v5M14 10V3"/></svg><span>Hong Jinhyo — Interpreter</span></a>
+    <span>KOR / ENG / 中 — Singapore</span>
+    <a id="modeToggle" href="?lite">Motion: Full → Lite</a>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script type="module" src="babel.js"></script>
+</body>
+</html>
